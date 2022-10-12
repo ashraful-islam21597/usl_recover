@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_field_service_tree" model="ir.ui.view">
+        <field name="model">field.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_no"/>
+                <field name="order_date"/>
+                <field name="branch_name"/>
+                <field name="dealer" optional="hide"/>
+                <field name="c_media" optional="hide"/>
+                <field name="service_type" optional="hide"/>
+                <field name="in_attachment" optional="hide"/>
+                <field name="imei_no"/>
+                <field name="invoice" optional="hide"/>
+                <field name="p_date" optional="hide"/>
+                <field name="product_id" optional="hide"/>
+                <field name="customer_id"/>
+                <field name="warranty_status" optional="hide"/>
+                <field name="warranty_expiry_date_l" optional="hide"/>
+                <field name="warranty_expiry_date_p" optional="hide"/>
+                <field name="guaranty_expiry_date" optional="hide"/>
+                <field name="warranty_void_reason_1" optional="hide"/>
+                <field name="department"/>
+                <field name="priority_level" optional="hide"/>
+                <field name="p_delivery_date"/>
+                <field name="customer_remark" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_field_service_form" model="ir.ui.view">
+        <field name="name">field.service.form</field>
+        <field name="model">field.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button-box" style="height:50px">
+
+                        <button class="oe_stat_button" type="object" style="width:210px"
+                                string="Assign To Engineer Details"
+                                name="actions_test" icon="fa-user">
+                            <!--                            <field name="outlet" string="Assign To Engineer Details" widget="statinfo"/>-->
+                        </button>
+                        <button class="oe_stat_button" type="object" style="width:210px" string="Diagnosis and Repair"
+                                name="actions_test"
+                                icon="fa-bug">
+                            <!--                            <field name="outlet" string="Diagnosis and Repair" widget="statinfo"/>-->
+                        </button>
+                        <button class="oe_stat_button" type="object" string="Item Consumption Details"
+                                name="actions_test" icon="fa-wrench">
+                            <!--                            <field name="outlet" string="Item Consumption Details" widget="statinfo"/>-->
+                        </button>
+                        <button class="oe_stat_button" type="object" string="Transport Activity details"
+                                name="actions_test" icon="fa-truck">
+                            <!--                            <field name="outlet" string="Transport Activity details" widget="statinfo"/>-->
+                        </button>
+                        <button class="oe_stat_button" type="object" string="Communication Details" name="actions_test"
+                                icon="fa-phone">
+                            <!--                            <field name="outlet" string="Communication Details" widget="statinfo"/>-->
+                        </button>
+                        <button class="oe_stat_button" type="object" string="Service Order Transfer" name="actions_test"
+                                icon="fa-check">
+                            <!--                            <field name="outlet" string="Service Order Transfer" widget="statinfo"/>-->
+                        </button>
+                        <button class="oe_stat_button" type="object" string="Remark" name="actions_test"
+                                icon="fa-bookmark">
+                            <!--                            <field name="outlet" string="Remark" widget="statinfo"/>-->
+                        </button>
+                    </div>
+                    <group col="3">
+                        <group>
+                            <field name="order_no"/>
+                            <field name="order_date"/>
+                            <field name="branch_name"/>
+                            <field name="dealer"/>
+                            <field name="c_media"/>
+                            <field name="service_type"/>
+                            <field name="in_attachment"/>
+                        </group>
+                        <group>
+                            <field name="imei_no"/>
+                            <field name="invoice"/>
+                            <field name="p_date"/>
+                            <field name="product_id"/>
+                            <field name="customer_id"/>
+                            <field name="warranty_status"/>
+                            <field name="warranty_expiry_date_l"/>
+                        </group>
+                        <group>
+                            <field name="warranty_expiry_date_p"/>
+                            <field name="guaranty_expiry_date"/>
+                            <field name="warranty_void_reason_1"/>
+                            <field name="department"/>
+                            <field name="priority_level"/>
+                            <field name="p_delivery_date"/>
+                            <field name="customer_remark"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="remark"/>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="repair_status"/>
+                            <field name="product_receive_date"/>
+                            <field name="delivery_date"/>
+                        </group>
+                        <group>
+                            <field name="item_receive_branch"/>
+                            <field name="item_receive_status"/>
+                        </group>
+                    </group>
+                    <group col="3">
+                        <group>
+                            <field name="receive_customer"/>
+                        </group>
+                        <group>
+                            <field name="so_transfer"/>
+                        </group>
+                        <group>
+                            <field name="is_sms"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Symptoms">
+                                <field name="symptoms_lines_ids">
+                                    <tree editable="bottom">
+                                        <field name="sl_no" readonly="1"/>
+                                        <field name="symptoms1"/>
+                                        <field name="reason1"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="sl_no" readonly="1"/>
+                                                <field name="symptoms1"/>
+                                                <field name="reason1"/>
+                                            </group>
+                                            <group>
+                                                <field name="symptoms1"/>
+                                                <field name="reason1"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_field_service" model="ir.actions.act_window">
+        <field name="name">Field Service</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">field.service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your fast field service !</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_field_service"
+              name="Field Service Details"
+              parent="menu_field_service_master"
+              action="action_field_service"
+              sequence="0"/>
+
+</odoo>
