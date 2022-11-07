@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _
 from datetime import date
+import datetime
+from odoo.exceptions import ValidationError
 
 
 class FieldService(models.Model):
@@ -12,119 +14,294 @@ class FieldService(models.Model):
 
     order_no = fields.Char(string='Order No', required=True, copy=False, readonly=True,
                            default=lambda self: _('New'))
-    order_date = fields.Date(string="Order Date", default=fields.Datetime.now)
-    branch_name = fields.Many2one('res.branch', string='Branch', tracking=True)
-    dealer = fields.Many2one(
+    order_date = fields.Date(string="Order Date", default=fields.Datetime.now, readonly=True, )
+
+    retail = fields.Many2one(
         'res.partner',
         string='Dealer/Retail',
         domain=['|', ('category_id', '=', 'Dealer'), ('category_id', '=', 'Retailer')]
     )
 
-    c_media = fields.Selection([
-        ('over email', 'Over Email'),
-        ('phone', 'Phone'),
-        ('social media', 'Social Media'),
-    ], string='Communication Media', tracking=True)
+    communication_media = fields.Many2one('communication.media', string='Communication Media', tracking=True)
 
     service_type = fields.Many2one('service.type', string='Service Type', tracking=True)
-    imei_no = fields.Many2one('field.service.data', string='IMEI/Serial No')
-    product_id = fields.Many2one(related='imei_no.product_id', string="Product")
-    invoice = fields.Char(related='imei_no.invoice', string='Invoice No', tracking=True)
+    imei_no = fields.Char(string='IMEI/Serial No', readonly=False, state={'draft': [('readonly', False)]})
+    # imei_number = fields.Char(string='IMEI/Serial No')
+
+    product_id = fields.Many2one('product.product', string="Product", readonly=True,
+                                 state={'draft': [('readonly', False)]})
+    invoice = fields.Char(string='Invoice No', tracking=True, readonly=True, state={'draft': [('readonly', False)]})
     in_attachment = fields.Binary(string='Invoice Attachment')
-    p_date = fields.Date(related='imei_no.p_date', string='POP Date')
-    customer_id = fields.Many2one(related='imei_no.customer_id', string='Customer', tracking=True)
-    warranty_status = fields.Selection(related='imei_no.warranty_status', string=' Warranty Status', readonly=False,
-                                       tracking=True)
-    warranty_expiry_date_l = fields.Date(related='imei_no.warranty_expiry_date_l', string='Warranty Expiry Date(L)')
-    warranty_expiry_date_p = fields.Date(related='imei_no.warranty_expiry_date_p', string='Warranty Expiry Date(P)')
+    p_date = fields.Date(string='POP Date')
+    customer_id = fields.Many2one('res.partner', string='Customer', tracking=True, readonly=True,
+                                  state={'draft': [('readonly', False)]})
+    warranty_status = fields.Many2one('warranty.status', string=' Warranty Status', tracking=True)
+    warranty_expiry_date_l = fields.Date(string='Warranty Expiry Date(L)', readonly=True,
+                                         state={'draft': [('readonly', False)]})
+    warranty_expiry_date_p = fields.Date(string='Warranty Expiry Date(P)', readonly=True,
+                                         state={'draft': [('readonly', False)]})
     warranty_void_reason_1 = fields.Many2one('warranty.void.reason', string="warranty Void Reason", tracking=True)
     guaranty_expiry_date = fields.Date(string='Guaranty Expiry Date')
-    department = fields.Selection([
-        ('hp notebook', 'HP Notebook'),
-        ('phone', 'Phone'),
-        ('apple', 'Apple'),
-    ], string='Department', tracking=True)
-    priority_level = fields.Selection([
-        ('low', 'Low'),
-        ('medium', 'Medium'),
-        ('high', 'High'),
-    ], string='Priority Level', tracking=True)
+    departments = fields.Many2one('field.service.department', required=True, string='Department', tracking=True, )
+    priority_lavel_duration = fields.Char(string='Priority Level Duration')
+    phone = fields.Char(string='Phone')
+    user_id = fields.Many2one('res.users', string='users', tracking=True, default=lambda self: self.env.user)
+    priority = fields.Selection([
+        ('0', 'Normal'),
+        ('1', 'Low'),
+        ('2', 'High'),
+        ('3', 'Very High')], string="Priority")
+
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('service_for_approval', 'Submitted For Approval'),
+        ('approval', 'Approved'),
+        ('cancel', 'Canceled')], default='draft', string="Status", required=True)
+
+    priority_levels = fields.Many2one('field.service.priority.level', string='Priority Level', tracking=True)
     p_delivery_date = fields.Date(string='Possible Delivery Date')
     customer_remark = fields.Char(string='Customer Remark')
-    remark = fields.Text(string='Remark')
-    symptoms = fields.Text(string="Symptoms")
-    reason = fields.Text(string="Reason")
+    remark = fields.Char(string='Remark', tracking=True)
 
     symptoms_lines_ids = fields.One2many('symptoms.lines', 'order_id', string="Symptoms")
+    symptoms_lines_id = fields.Many2one('symptoms.lines', string="Symptoms")
+    special_notes_ids = fields.One2many('special.notes', 'order_id', string="Special Notes", )
 
     repair_status = fields.Selection([
         ('repaired', 'Repaired'),
+        ('pending', 'Pending'),
         ('not_repaired', 'Not-repaired'),
         ('repairing', 'Repairing'),
-    ], string='Repair Status', tracking=True)
+    ], string='Repair Status', tracking=True, default='pending')
+
     product_receive_date = fields.Date(string='Product Receive Date')
     delivery_date = fields.Date(string='Delivery Date')
-    item_receive_branch = fields.Char(string='Item Receive Branch')
+    item_receive_branch = fields.Many2one('res.branch',string='Item Receive Branch')
     item_receive_status = fields.Char(string='Item Receive Status')
     receive_customer = fields.Boolean(string='Is Receive From Customer')
     so_transfer = fields.Boolean(string='Is So Transfer')
     is_sms = fields.Boolean(string='Is SMS')
+    special_note = fields.Char(string="Special Note")
+    branch_name = fields.Many2one('res.branch', tracking=True, required=True)
+    #has_reason = fields.Boolean(string="Info", default=False)
 
     def set_line_number(self):
         sl_no = 0
         for line in self.symptoms_lines_ids:
             sl_no += 1
             line.sl_no = sl_no
-        return
-
-    # @api.model
-    # def create(self, vals):
-    #     if vals.get('order_no', _('New')) == _('New'):
-    #         vals['order_no'] = self.env['ir.sequence'].next_by_code('field.service') or _('New')
-    #     res = super(FieldService, self).create(vals)
-    #     # res.set_line_number()
-    #     return res
-    #
-    # def write(self, vals):
-    #     res = super().write(vals)
-    #     # self.set_line_number()
-    #     return res
-    #
-    def actions_test(self):
-        return
+        return sl_no
 
     @api.model
     def create(self, vals):
-        # vals['order_no'] = self.env['ir.sequence'].next_by_code('service.order')
-        res=super(FieldService, self).create(vals)
-        res.set_line_number()
-        return res
+        if vals.get('order_no', _('New')) == _('New'):
+            x = datetime.datetime.now()
+            s = str(x.year)[2:] + str(x.month) + str(x.day)
+
+            print(x.year)
+            print(x.strftime("%A"))
+            date_seq = (datetime.datetime.now()).strftime("%b-%d").upper()
+            s1 = str(self.env['ir.sequence'].next_by_code('field.service') or _('New'))
+            s2 = s1[:2] + s + s1[2:]
+            vals['order_no'] = s2
+            user_branch = self.env['res.users'].browse(self._context.get('uid')).branch_id
+
+        if vals.get('symptoms_lines_ids') != []:
+            res = super(FieldService, self).create(vals)
+            res.set_line_number()
+            self.env['assign.engineer.details'].create({'order_id': res.id})
+            return res
+        else:
+            raise ValidationError("Service Order will not be created with Bblank symptoms line")
+
+        # self.env['stock.picking'].create(val)
+
+    @api.onchange("imei_no")
+    def _onchange_imei_number(self):
+        user = self.env['res.users'].browse(self._context.get('uid'))
+        imei_number = self.env['field.service.data'].search([('serial_no', '=', self.imei_no)])
+        # self.serial_no = self.order_id.imei_no.serial_no
+        self.product_id = imei_number.product_id
+        self.customer_id = imei_number.customer_id
+        self.warranty_status = imei_number.warranty_status
+        self.invoice = imei_number.invoice
+        self.warranty_expiry_date_l = imei_number.warranty_expiry_date_l
+        self.warranty_expiry_date_p = imei_number.warranty_expiry_date_p
+        self.branch_name = user.branch_id
+        self.item_receive_branch = user.branch_id
+        #self.in_attachment=imei_number.invoice
+        if self.receive_customer != True:
+            self.item_receive_status = "Pending"
 
 
-    def write(self, values):
 
-        res = super(FieldService, self).write(values)
-        self.set_line_number()
-        return res
+    def actions_test(self):
+        print("hello")
+        return
+
+    def transfer_button(self):
+        for rec in self:
+            print(self.id)
+            if rec.state != "approval":
+                raise ValidationError("Service Order is not approved yet")
+            else:
+                if rec.receive_customer != True:
+                    raise ValidationError("Service Order Item is not received yet")
+                else:
+                    if rec.so_transfer == True:
+                        raise ValidationError("Service Order Item is already transfered")
+                    else:
+                        p = self.env['stock.picking.type'].search(
+                            [('warehouse_id', '=', self.env.user.context_default_warehouse_id.id),
+                             ('code', '=', 'internal')], limit=1)
+                        return {
+
+                            'name': _('Item Receive'),
+                            'type': 'ir.actions.act_window',
+                            'res_model': 'stock.picking',
+                            'view_mode': 'form',
+                            'view_id': self.env.ref('usl_service_erp.view_picking_form_field_service_transfer').id,
+                            'context': {'default_branch_id': self.branch_name.id,
+                                        'default_partner_id': self.customer_id.id,
+                                        'default_picking_type_id': p.id, 'default_service_order_id': self.id, },
+                            'target': 'current',
+
+                        }
+
+
+    def receive_button(self):
+        for rec in self:
+            print(self.id)
+            if rec.receive_customer == True:
+                raise ValidationError("Service Order Item is already received")
+            else:
+                if rec.state != "approval":
+                    raise ValidationError("Service Order is not approved yet")
+                else:
+                    p = self.env['stock.picking.type'].search(
+                        [('warehouse_id', '=', self.env.user.context_default_warehouse_id.id),
+                         ('code', '=', 'incoming')], limit=1)
+                    return {
+
+                        'name': _('Item Receive'),
+                        'type': 'ir.actions.act_window',
+                        'res_model': 'stock.picking',
+                        'view_mode': 'form',
+                        'view_id': self.env.ref('usl_service_erp.view_picking_form_field_service_receive').id,
+                        'context': {'default_picking_type_id': p.id, 'default_partner_id': self.customer_id.id,
+                                    'default_service_order_id': self.id, },
+                        'target': 'current',
+
+                    }
+
+    def reset_to_draft(self):
+        if self.receive_customer == True:
+            raise ValidationError("Reset ")
+        for rec in self:
+            rec.state = 'draft'
+
+    def action_service_for_approval(self):
+        for rec in self:
+            rec.state = 'service_for_approval'
+
+    def action_approval(self):
+        for rec in self:
+            rec.state = 'approval'
+
+    def action_cancel(self):
+        for rec in self:
+            rec.state = 'cancel'
+
+    def action_draft(self):
+        for rec in self:
+            rec.state = 'draft'
 
     def action_symptoms(self):
         return
 
-    # def write(self, values):
-    #     res = super(FieldService, self).write(values)
-    #     sl_no = 0
-    #     for line in self.symptoms_lines_ids:
-    #         sl_no += 1
-    #         line.sl_no = sl_no
-    #     return res
+    def write(self, vals):
+        res = super().write(vals)
+        self.set_line_number()
+        return res
+
+    def action_view_assign(self):
+        data = self.env['assign.engineer.details'].search([('order_id', '=', self.id)])
+
+        if data:
+            print('succes')
+        else:
+            print("create")
+            self.env['assign.engineer.details'].create({'order_id': self.id})
+        data = self.env['assign.engineer.details'].search([('order_id', '=', self.id)])
+
+        print("**********", data)
+        return {
+            'type': 'ir.actions.act_url',
+            'target': 'self',
+            'url': f"/web#id={data.id}&cids=1&menu_id=316&action=437&model=assign.engineer.details&view_type=form"
+
+        }
+
+    def action_diagnosis_repair(self):
+
+        return {
+            'name': _('Diagnosis Repair'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'diagnosis.repair',
+            'view_mode': 'tree,form',
+            'context': {'default_order_id': self.id},
+            'target': 'current',
+            'domain': [('order_id', '=', self.id)],
+        }
+
+
+class ResUsers(models.Model):
+    _inherit = "res.users"
+    _rec_name = "name"
+
+    task_count = fields.Integer(string='Task Count', compute='_compute_task_count')
+
+    def _compute_task_count(self):
+        for rec in self:
+            task_count = self.env['diagnosis.repair'].search_count([('engineer', '=', rec.name)])
+            rec.task_count = task_count
+
+    def name_get(self):
+        list = []
+        for rec in self:
+            name = str(rec.name) + ' ' + '(' + str(rec.task_count) + ')'
+            list.append((rec.id, name))
+        return list
+
+    def _get_domain(self):
+        for rec in self:
+            if rec.has_group('usl_service_erp.group_service_manager'):
+                return []
+            if rec.has_group('usl_service_erp.group_service_engineer'):
+                return [('engineer', '=', rec.id)]
+
+            else:
+                return []
 
 
 class SymptomsLines(models.Model):
     _name = "symptoms.lines"
     _description = "Symptoms Lines"
 
-    symptoms1 = fields.Text(string="Symptoms")
-    reason1 = fields.Text(string="Reason")
+    symptoms = fields.Many2one('symptoms.type', required=True, string="Symptoms")
+    reason = fields.Many2one("reasons.type", required=True, string="Reason", readonly=False)
     sl_no = fields.Integer(string='SLN.')
+    order_id = fields.Many2one('field.service', required=True, string="Order")
+
+
+class SpecialNotes(models.Model):
+    _name = "special.notes"
+    _description = "Special Notes"
+
+    sl_no = fields.Integer(string='SLN.')
+    wui = fields.Char(string="Windows User Id")
+    wup = fields.Char(string="Windows User Password")
+    bui = fields.Char(string="BIOS User Id")
+    bup = fields.Char(string="BIOS User Password")
 
     order_id = fields.Many2one('field.service', string="Order")

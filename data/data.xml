@@ -8,10 +8,46 @@
     </record>
 
 
-     <record id="seq_field_service_data" model="ir.sequence">
+    <record id="seq_field_service_data" model="ir.sequence">
         <field name="name">Field Service Data</field>
         <field name="code">field.service.data</field>
         <field name="prefix">IMEI</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+<!--    <record id="seq_field_service_order_transfer_data" model="ir.sequence">-->
+<!--        <field name="name">Field Service Data</field>-->
+<!--        <field name="code">stock.picking.inherit</field>-->
+<!--        <field name="prefix">RT</field>-->
+<!--        <field name="padding">5</field>-->
+<!--        <field name="company_id" eval="False"/>-->
+<!--    </record>-->
+    <record id="seq_service_order_receive" model="ir.sequence">
+        <field name="name">Service Order Receive</field>
+        <field name="code">so.receive</field>
+        <field name="prefix">SO-Recieve-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="seq_service_order_transfer" model="ir.sequence">
+        <field name="name">Service Order Transfer</field>
+        <field name="code">so.transfer</field>
+        <field name="prefix">SO-Transfer-</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="seq_advance_item_requisition_warranty_inherit" model="ir.sequence">
+        <field name="name">Advance Item Requisition Warranty Inherit</field>
+        <field name="code">stock.picking.inherit</field>
+        <field name="prefix">IRW</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="seq_item_requisition_warranty_data" model="ir.sequence">
+        <field name="name">Item Requisition Warranty</field>
+        <field name="code">item.requisition.warranty</field>
+        <field name="prefix">IRW</field>
         <field name="padding">5</field>
         <field name="company_id" eval="False"/>
     </record>

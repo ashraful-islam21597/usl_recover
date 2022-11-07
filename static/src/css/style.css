@@ -1,0 +1,30 @@
+.button1{
+    max-width:10% !important;
+    float: left;
+    justify-content: space-between;
+}
+
+.custom_class table{
+    width: 300px;
+}
+.custom_class table th {
+
+  background-color: lightgreen;
+}
+
+.custom_class th {
+    min-width: 130px !important;
+    width: 130px !important;
+    max-width: 500px !important
+}
+.custom_class th[data-name=item]{
+    position: sticky !important;
+    min-width:230px !important;
+    width: 230px !important;
+    max-width:500px !important;
+
+}
+
+.oe_form_sheet_width_wider .clearfix.position-relative.o_form_sheet {
+    max-width: 98% !important;
+}

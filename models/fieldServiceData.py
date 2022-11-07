@@ -14,7 +14,7 @@ class FieldServiceData(models.Model):
     product_id = fields.Many2one('product.product', required=True)
     customer_id = fields.Many2one('res.partner', required=True)
     p_date = fields.Date(string="POP Date")
-    warranty_status = fields.Selection([('warranty', 'Warranty'), ('guaranty', 'Guaranty')], string="Warranty Status")
+    warranty_status = fields.Many2one("warranty.status", string="Warranty Status")
     warranty_expiry_date_l = fields.Date(string="Warranty Expiry Date(L)")
     warranty_expiry_date_p = fields.Date(string="Warranty Expiry Date(p)")
     guaranty_expiry_date = fields.Date(string="Guaranty Expiry Date")
@@ -24,4 +24,5 @@ class FieldServiceData(models.Model):
         if vals.get('serial_no', _('New')) == _('New'):
             vals['serial_no'] = self.env['ir.sequence'].next_by_code('field.service.data') or _('New')
         res = super(FieldServiceData, self).create(vals)
+        print(res.serial_no)
         return res

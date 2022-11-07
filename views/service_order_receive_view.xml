@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    <record id="receive_tree" model="ir.ui.view">-->
+<!--        <field name="name">order.item.receive.tree</field>-->
+<!--        <field name="model">order.item.receive</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="receive_serial"/>-->
+<!--                <field name="item_receive_date"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="order_receive_form" model="ir.ui.view">-->
+<!--        <field name="name">order.item.receive.form</field>-->
+<!--        <field name="model">order.item.receive</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <header>-->
+<!--                    <button name="action_receive" string="Approve Service Order" data-hotkey="l" states="draft"-->
+<!--                            class="oe_highlight" type="object"/>-->
+
+<!--                    <field name="state" widget="statusbar" nolabel="1"-->
+<!--                           statusbar_visible="draft,item_received,approved"-->
+<!--                    />-->
+<!--                </header>-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="delivery_no"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="item_receive_date"/>-->
+<!--                        </group>-->
+
+<!--                        <group>-->
+<!--                            <field name="branch"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+
+
+<!--                    <notebook>-->
+<!--                        <page string="Detail">-->
+
+<!--                            <field name="order_receive_ids">-->
+
+
+<!--                                <tree editable="bottom">-->
+<!--                                    <field name="order_item_id"/>-->
+<!--                                    <field name="item"/>-->
+<!--                                    <field name="model"/>-->
+<!--                                    <field name="quantity"/>-->
+<!--                                    <field name="serial_no"/>-->
+
+
+<!--                                </tree>-->
+<!--                                <form>-->
+<!--                                    <group>-->
+<!--                                        <group>-->
+<!--                                            <field name="order_item_id"/>-->
+<!--                                            <field name="item"/>-->
+<!--                                            <field name="model"/>-->
+<!--                                            <field name="quantity"/>-->
+<!--                                            <field name="serial_no"/>-->
+<!--                                        </group>-->
+
+<!--                                    </group>-->
+<!--                                </form>-->
+<!--                            </field>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+
+</odoo>

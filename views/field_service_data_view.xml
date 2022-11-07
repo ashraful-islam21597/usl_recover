@@ -81,5 +81,5 @@
             name="Field Service Data"
             action="action_field_service_data"
             parent="menu_field_service_master"
-            sequence="10"/>
+            sequence="0"/>
 </odoo>

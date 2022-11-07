@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_operation" model="ir.actions.server">
+        <field name="name">operation</field>
+<!--         <field name="view_id" ref="usl_service_erp.view_picking_form_field_service"/>-->
+        <field name="model_id" ref="model_stock_picking"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_operation()</field>
+
+
+<!--        <field name="help" type="html">-->
+<!--            <p class="">Create Service Order receive</p>-->
+<!--        </field>-->
+    </record>
+
+    <menuitem id="menu_operation"
+              name="service Order Transfer"
+              action="action_operation"
+              parent="menu_field_service_master"
+              sequence="30"/>
+</odoo>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <record id="action_operation" model="ir.actions.server">-->
+<!--        <field name="name">operation</field>-->
+
+<!--        <field name="model_id" ref="model_stock_picking"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">model.action_operation()</field>-->
+
+<!--        &lt;!&ndash;        <field name="view_id" ref="usl_service_erp.view_picking_form_field_service"/>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        <field name="help" type="html">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <p class="">Create Service Order receive</p>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </field>&ndash;&gt;-->
+<!--    </record>-->
+
+<!--    <menuitem id="menu_operation"-->
+<!--              name="Operation"-->
+<!--              action="action_operation"-->
+<!--              parent="menu_field_service_master"-->
+<!--              sequence="10"/>-->
+<!--</odoo>-->
+
+        <!--    <record id="action_operation" model="ir.actions.act_window">-->
+        <!--        <field name="name">order transfer</field>-->
+        <!--        <field name="model_id" ref="usl_service_erp.model_field_service"/>-->
+
+        <!--&lt;!&ndash;        <field name="view_id" ref="usl_service_erp.view_picking_form_field_service_transfer"/>&ndash;&gt;-->
+        <!--        <field name="state">code</field>-->
+        <!--        <field name="state">code</field>-->
+        <!--        <field name="code">action = model.actions_test()</field>-->
+        <!--    </record>-->
+
+        <!--    <menuitem id="operation_id"-->
+        <!--              name="operation"-->
+        <!--              action="action_operation"-->
+        <!--              parent="menu_field_service_master"-->
+        <!--              sequence="10"/>-->
+        <!--</odoo>-->
+
+

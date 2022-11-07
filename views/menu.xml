@@ -9,7 +9,16 @@
               parent="menu_field_service_root"
               sequence="0"/>
     <menuitem id="configuration_main_menu"
-              name = "Configuration"
+              name="Configuration"
               parent="menu_field_service_root"
-              sequence="0"/>
+              sequence="20"/>
+    <menuitem id="inventory_service_main_menu"
+              name="Inventory Service"
+              parent="menu_field_service_root"
+              sequence="10"/>
+    <menuitem id="menu_task_manager"
+              name="Task Manager"
+              parent="menu_field_service_root"
+              sequence="25"/>
+
 </odoo>
