@@ -5,7 +5,7 @@
         <field name="name">stock.picking.tree</field>
         <field name="model">stock.picking</field>
         <field name="arch" type="xml">
-            <tree string="Picking list" js_class="lazy_column_list" multi_edit="1" sample="1">
+            <tree create="0" string="Picking list" js_class="lazy_column_list" multi_edit="1" sample="1">
                 <header>
                     <button name="do_unreserve" type="object" string="Unreserve"/>
                     <button name="action_assign" type="object" string="Check Availability"/>
@@ -50,7 +50,7 @@
         <field name="model">stock.picking</field>
         <field eval="20" name="priority"/>
         <field name="arch" type="xml">
-            <form string="Transfer">
+            <form  string="Transfer">
 
                 <field name="is_locked" invisible="1"/>
                 <field name="show_mark_as_todo" invisible="1"/>
@@ -79,13 +79,17 @@
                     <!--                    <button name="action_assign" attrs="{'invisible': [('show_check_availability', '=', False)]}"-->
                     <!--                            string="Check Availability" type="object" class="oe_highlight" groups="base.group_user"/>-->
 <!--                    <button name="button_validate"-->
-<!--                            attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed','assigned')),('show_validate', '=', False)]}"-->
+<!--                            attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')),('show_validate', '=', False)]}"-->
 <!--                            string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user"-->
 <!--                            data-hotkey="v"/>-->
 
+<!--                    <button name="button_validate"-->
+<!--                            attrs="{'invisible': True}"-->
+<!--                            string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"-->
+<!--                            data-hotkey="v"/>-->
                     <button name="button_validate"
-                            attrs="{'invisible': ['|', ('state', 'in', ('waiting', 'confirmed')),('show_validate', '=', False)]}"
-                            string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"
+                            attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')),('show_validate', '=', False)]}"
+                            string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user"
                             data-hotkey="v"/>
 
                     <button name="action_set_quantities_to_reservation"
@@ -210,6 +214,7 @@
                             <field name="date_done" string="Effective Date"
                                    attrs="{'invisible': [('state', '!=', 'done')]}"/>
                             <field name="service_order_id" domain="[('receive_customer','=',True)]" force_save="1"/>
+
                             <field name="transfer_to_branch" force_save="1"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'internal')]}"/>
                             <!--                            <field name="origin" placeholder="e.g. PO0032"/>-->
@@ -382,29 +387,22 @@
         </field>
     </record>
     <record id="action_order_transfer_receive" model="ir.actions.act_window">
-        <field name="name">order transfer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Transfered Orders Receive</field>
         <field name="res_model">stock.picking</field>
         <field name="view_mode">tree,form</field>
-
+         <field name="domain">[('picking_type_code','=','internal'),('state','=','assigned')]</field>
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('view_picking_tree_field_service_transfer_order_receive')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_picking_form_field_service_transfer_order_receive')})]"/>
-<!--        <field name="type">ir.actions.server</field>-->
-<!--        <field name="state">code</field>-->
-<!--        <field name="code">model.on_test_server_action()</field>-->
-
-
-        <field name="type">ir.actions.act_window</field>
-
-
         <field name="help" type="html">
             <p class="">Create Service Order transfer</p>
         </field>
     </record>
 
-<!--    <menuitem id="menu_order_transfer"-->
-<!--              name="Order Item transfer"-->
-<!--              action="action_order_transfer"-->
+<!--    <menuitem id="menu_order_receive"-->
+<!--              name="transfer order recive"-->
+<!--              action="action_order_transfer_receive"-->
 <!--              parent="menu_field_service_master"-->
 <!--              sequence="10"/>-->
 </odoo>

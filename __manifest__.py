@@ -18,6 +18,7 @@
         'views/menu.xml',
 
         'views/field_service_view.xml',
+
         'views/field_service_data_view.xml',
         'views/service_type_view.xml',
         'views/warranty_void_reason_view.xml',
@@ -26,7 +27,7 @@
         'views/diagnosis_repair.xml',
         'views/assign_engineer.xml',
         'views/template.xml',
-        ''
+
         'views/engineer_observation.xml',
         'views/symptoms_type_view.xml',
         'views/field_service_department_view.xml',
@@ -36,6 +37,8 @@
         'views/advance_item_requisition_warranty_inherit_view.xml',
         'views/advance_item_requisition_non_warranty_inherit_view.xml',
         'views/service_order_receive_view.xml',
+        'views/receive_new.xml',
+        'views/transfer_new.xml',
         'views/css_loader.xml',
         'views/service_order_receive.xml',
         'views/item_requisition_warranty_view_inherit.xml',
@@ -44,7 +47,7 @@
         'views/operation.xml',
         'views/operation_receive.xml',
         'views/transfer_order_receive.xml',
-        'views/transfer_order_receive_operation.xml'
+        'views/transfer_order_receive_operation.xml',
 
     ],
     'assets': {

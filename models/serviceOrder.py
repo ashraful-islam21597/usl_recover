@@ -171,6 +171,7 @@ class FieldService(models.Model):
 
     def receive_button(self):
         for rec in self:
+            # print(rec.active_id)
             print(self.id)
             if rec.receive_customer == True:
                 raise ValidationError("Service Order Item is already received")
@@ -187,10 +188,10 @@ class FieldService(models.Model):
                         'type': 'ir.actions.act_window',
                         'res_model': 'stock.picking',
                         'view_mode': 'form',
+                        'view_type': 'form',
                         'view_id': self.env.ref('usl_service_erp.view_picking_form_field_service_receive').id,
                         'context': {'default_picking_type_id': p.id, 'default_partner_id': self.customer_id.id,
                                     'default_service_order_id': self.id, },
-                        'target': 'current',
 
                     }
 

@@ -48,7 +48,7 @@
     <record id="view_picking_form_field_service_transfer" model="ir.ui.view">
         <field name="name">stock.picking.form</field>
         <field name="model">stock.picking</field>
-        <field eval="20" name="priority"/>
+        <field eval="15" name="priority"/>
         <field name="arch" type="xml">
             <form string="Transfer">
 
@@ -72,21 +72,29 @@
                     <button name="action_confirm" attrs="{'invisible': [('show_mark_as_todo', '=', False)]}"
                             string="Mark as Todo" type="object" class="oe_highlight" groups="base.group_user"
                             data-hotkey="x"/>
-
-<!--                    <button name="action_confirm" attrs="{'invisible': [('show_mark_as_todo', '=', False)]}"-->
-<!--                            string="Submit For Approval" type="object" class="oe_highlight" groups="base.group_user"-->
+<!--                     <button name="action_approve" attrs="{'invisible': [('show_mark_as_todo', '=', False)]}"-->
+<!--                            string="Mark as Todo" type="object" class="oe_highlight" groups="base.group_user"-->
 <!--                            data-hotkey="x"/>-->
+
+                    <!--                    <button name="action_confirm" attrs="{'invisible': [('show_mark_as_todo', '=', False)]}"-->
+                    <!--                            string="Submit For Approval" type="object" class="oe_highlight" groups="base.group_user"-->
+                    <!--                            data-hotkey="x"/>-->
                     <!--                    <button name="action_assign" attrs="{'invisible': [('show_check_availability', '=', False)]}"-->
                     <!--                            string="Check Availability" type="object" class="oe_highlight" groups="base.group_user"/>-->
-                    <button name="button_validate"
-                            attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')), ('show_validate', '=', False)]}"
-                            string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user"
-                            data-hotkey="v"/>
+<!--                                        <button name="button_validate"-->
+<!--                                                invisible="1"-->
+<!--                                                string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user"-->
+<!--                                                data-hotkey="v"/>-->
 
-                    <button name="button_validate"
-                            attrs="{'invisible': ['|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False)]}"
-                            string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"
-                            data-hotkey="v"/>
+<!--                    <button name="button_validate"-->
+<!--                            attrs="{'invisible': ['|', ('state', 'in', ('waiting', 'confirmed')), ('show_validate', '=', False),]}"-->
+<!--                            string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"-->
+<!--                            data-hotkey="v"/>-->
+
+<!--                     <button name="button_validate"-->
+<!--                            attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')),('show_validate', '=', False)]}"-->
+<!--                            string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user"-->
+<!--                            data-hotkey="v"/>-->
 
                     <button name="action_set_quantities_to_reservation"
                             attrs="{'invisible': ['|', ('show_validate', '=', False), ('immediate_transfer', '=', True)]}"
@@ -164,6 +172,7 @@
                             <field name="priority" widget="priority" class="mr-3"
                                    attrs="{'invisible': [('name','=','/')]}"/>
                             <field name="name" attrs="{'invisible': [('name','=','/')]}"/>
+                            <!--                            <field name="serial" attrs="{'invisible': [('name','=','/')]}"/>-->
                         </h1>
                     </div>
                     <group>
@@ -177,12 +186,12 @@
                                        attrs="{'invisible': [('picking_type_code', 'in', ['incoming', 'outgoing'])]}"/>
                             </div>
                             <field name="partner_id" nolabel="1"/>
-                            <field name="picking_type_id"
+                            <field name="picking_type_id" readonly="0"
                                    attrs="{'invisible': [('hide_picking_type', '=', True)]}"/>
-                            <field name="location_id" options="{'no_create': True}"
+                            <field name="location_id" force_save="1" readonly="0" options="{'no_create': True}"
                                    groups="stock.group_stock_multi_locations"
                                    attrs="{'invisible': [('picking_type_code', '=', 'incoming')]}"/>
-                            <field name="location_dest_id" readonly="1" force_save="1" options="{'no_create': False}"
+                            <field name="location_dest_id" readonly="1" force_save="0" options="{'no_create': False}"
                                    groups="stock.group_stock_multi_locations"
                                    attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}"/>
                             <field name="backorder_id" attrs="{'invisible': [('backorder_id','=',False)]}"/>
@@ -209,10 +218,13 @@
                                    decoration-danger="state != 'assigned' and products_availability_state == 'late'"/>
                             <field name="date_done" string="Effective Date"
                                    attrs="{'invisible': [('state', '!=', 'done')]}"/>
-                            <field name="service_order_id" domain="[('receive_customer','=',True)]" force_save="1"/>
+
+                            <field name="branch_id"  string="From Branch" force_save="1" readonly="1"
+                                   attrs="{'invisible': [('picking_type_code', '!=', 'internal')]}"/>
                             <field name="transfer_to_branch" force_save="1"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'internal')]}"/>
                             <!--                            <field name="origin" placeholder="e.g. PO0032"/>-->
+                             <field name="service_order_id" domain="[('receive_customer','=',True)]" force_save="1"/>
                             <field name="owner_id" groups="stock.group_tracking_owner"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'incoming')]}"/>
                         </group>
@@ -381,31 +393,26 @@
             </form>
         </field>
     </record>
+
     <record id="action_order_transfer" model="ir.actions.act_window">
-        <field name="name">order transfer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Service Order Transfer</field>
         <field name="res_model">stock.picking</field>
         <field name="view_mode">tree,form</field>
+         <field name="domain">[('picking_type_code','=','internal')]</field>
+        <field name="context">{'default_custom_operation_transfer':True}</field>
         <field name="view_ids" eval="[(5, 0, 0),
                 (0, 0, {'view_mode': 'tree', 'view_id': ref('view_picking_tree_field_service_transfer')}),
                 (0, 0, {'view_mode': 'form', 'view_id': ref('view_picking_form_field_service_transfer')})]"/>
-<!--        <field name="type">ir.actions.server</field>-->
-<!--        <field name="state">code</field>-->
-<!--        <field name="code">model.on_test_server_action()</field>-->
 
 
-        <field name="type">ir.actions.act_window</field>
-
-
-        <field name="help" type="html">
-            <p class="">Create Service Order transfer</p>
-        </field>
     </record>
 
-<!--    <menuitem id="menu_order_transfer"-->
-<!--              name="Order Item transfer"-->
-<!--              action="action_order_transfer"-->
-<!--              parent="menu_field_service_master"-->
-<!--              sequence="10"/>-->
+        <menuitem id="menu_order_transfer"
+                  name="Service Order Transfer"
+                  action="action_order_transfer"
+                  parent="menu_field_service_master"
+                  sequence="30"/>
 </odoo>
 
 

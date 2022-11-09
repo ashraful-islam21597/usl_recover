@@ -14,11 +14,11 @@
 <!--        </field>-->
     </record>
 
-    <menuitem id="menu_operation"
-              name="service Order Transfer"
-              action="action_operation"
-              parent="menu_field_service_master"
-              sequence="30"/>
+<!--    <menuitem id="menu_operation"-->
+<!--              name="Service Order Transfer Test"-->
+<!--              action="action_operation"-->
+<!--              parent="menu_field_service_master"-->
+<!--              sequence="30"/>-->
 </odoo>
 
 <!--<?xml version="1.0" encoding="utf-8"?>-->
