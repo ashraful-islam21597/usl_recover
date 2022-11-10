@@ -17,3 +17,5 @@ from . import item_receive
 from . import engineer_observation
 from . import stock_move
 from . import itemRequisitionInherit
+from . import quality_assurance_details
+from .import qa_check_list

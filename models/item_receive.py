@@ -29,6 +29,7 @@ class StockPickingOperation(models.Model):
         states={'draft': [('readonly', False)]})
 
     branch_id = fields.Many2one('res.branch', default=lambda self: self.env.user.branch_id)
+    received = fields.Boolean(related='service_order_id.receive_customer', string="received status")
 
 
     def _set_operation_type(self):

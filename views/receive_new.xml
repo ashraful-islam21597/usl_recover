@@ -34,7 +34,7 @@
                        decoration-danger="state != 'assigned' and products_availability_state == 'late'"/>
                 <field name="date_deadline" optional="hide" widget="remaining_days"
                        attrs="{'invisible':[('state', 'in', ('done', 'cancel'))]}"/>
-                <field name="date_done" string="Effective Date" optional="hide"/>
+<!--                <field name="date_done" string="Effective Date" optional="hide"/>-->
                 <!--                    <field name="origin" optional="show"/>-->
                 <field name="backorder_id" optional="hide"/>
                 <field name="picking_type_id" optional="hide"/>
@@ -174,12 +174,12 @@
                             <!--                                       attrs="{'invisible': [('picking_type_code', 'in', ['incoming', 'outgoing'])]}"/>-->
                             <!--                            </div>-->
                             <field name="partner_id" nolabel="1" invisible="1"/>
-                            <field name="picking_type_id"
-                                   attrs="{'invisible': [('hide_picking_type', '=', True)]}"/>
-                            <field name="location_id" options="{'no_create': True}"
+                            <field name="picking_type_id" force_save="1" readonly="1"
+                                   />
+                            <field name="location_id" options="{'no_create': True}" force_save="1" readonly="1"
                                    groups="stock.group_stock_multi_locations"
                                    attrs="{'invisible': [('picking_type_code', '=', 'incoming')]}"/>
-                            <field name="location_dest_id" options="{'no_create': True}"
+                            <field name="location_dest_id" options="{'no_create': True}" force_save="1" readonly="1"
                                    groups="stock.group_stock_multi_locations"
                                    attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}"/>
                             <field name="backorder_id" attrs="{'invisible': [('backorder_id','=',False)]}"/>
@@ -206,7 +206,7 @@
                                    decoration-danger="state != 'assigned' and products_availability_state == 'late'"/>
                             <field name="date_done" string="Effective Date"
                                    attrs="{'invisible': [('state', '!=', 'done')]}"/>
-                            <field name="service_order_id" force_save="1" domain="[('receive_customer','=',False)]"/>
+                            <field name="service_order_id" force_save="1" readonly="1" domain="[('receive_customer','=',False)]"/>
                             <!--                            <field name="origin" placeholder="e.g. PO0032"/>-->
                             <field name="owner_id" groups="stock.group_tracking_owner"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'incoming')]}"/>
@@ -259,8 +259,8 @@
                                     <field name="product_uom_category_id" invisible="1"/>
                                     <field name="has_tracking" invisible="1"/>
                                     <field name="display_assign_serial" invisible="1"/>
-                                    <field name="product_id" required="1" force_save="1"/>
-                                    <field name="serial_no" required="1" force_save="1"/>
+                                    <field name="product_id" readonly="1" required="1" force_save="1"/>
+                                    <field name="serial_no"  readonly="1" required="1" force_save="1"/>
 
                                     <!--                                    <field name="product_id" required="1" context="{'default_detailed_type': 'product'}"-->
                                     <!--                                           attrs="{'readonly': ['|', '&amp;', ('state', '!=', 'draft'), ('additional', '=', False), ('move_lines_count', '&gt;', 0)]}"/>-->

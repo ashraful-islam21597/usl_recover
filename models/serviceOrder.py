@@ -78,12 +78,26 @@ class FieldService(models.Model):
     delivery_date = fields.Date(string='Delivery Date')
     item_receive_branch = fields.Many2one('res.branch',string='Item Receive Branch')
     item_receive_status = fields.Char(string='Item Receive Status')
-    receive_customer = fields.Boolean(string='Is Receive From Customer')
+    receive_customer = fields.Boolean(string='Is Receive From Customer',default=False)
+    x = fields.Boolean(string='Is Receive From Customer',default=lambda self: self._set_state_type())
     so_transfer = fields.Boolean(string='Is So Transfer')
     is_sms = fields.Boolean(string='Is SMS')
     special_note = fields.Char(string="Special Note")
     branch_name = fields.Many2one('res.branch', tracking=True, required=True)
     #has_reason = fields.Boolean(string="Info", default=False)
+    @api.onchange('state','receive_customer')
+    def _set_state_type(self):
+        if self.state == "approval":
+            if self.receive_customer == True:
+                self.x = True
+            else:
+                self.x = False
+        else:
+            if self.receive_customer == False:
+                self.x = True
+
+
+
 
     def set_line_number(self):
         sl_no = 0
@@ -115,6 +129,11 @@ class FieldService(models.Model):
             raise ValidationError("Service Order will not be created with Bblank symptoms line")
 
         # self.env['stock.picking'].create(val)
+
+    @api.onchange("warranty_void_reason_1")
+    def _onchange_iwarranty_void_reason(self):
+        if self.warranty_void_reason_1 != None:
+            self.warranty_status = None
 
     @api.onchange("imei_no")
     def _onchange_imei_number(self):
@@ -189,15 +208,15 @@ class FieldService(models.Model):
                         'res_model': 'stock.picking',
                         'view_mode': 'form',
                         'view_type': 'form',
-                        'view_id': self.env.ref('usl_service_erp.view_picking_form_field_service_receive').id,
+                        'view_id': self.env.ref('usl_service_erp.view_picking_form_field_service_receive_new').id,
                         'context': {'default_picking_type_id': p.id, 'default_partner_id': self.customer_id.id,
                                     'default_service_order_id': self.id, },
 
                     }
 
     def reset_to_draft(self):
-        if self.receive_customer == True:
-            raise ValidationError("Reset ")
+        # if self.receive_customer == True:
+        #     raise ValidationError("Reset ")
         for rec in self:
             rec.state = 'draft'
 
@@ -208,6 +227,11 @@ class FieldService(models.Model):
     def action_approval(self):
         for rec in self:
             rec.state = 'approval'
+            if rec.state == 'approval' and rec.receive_customer == True:
+                self.x == True
+            elif rec.state == 'approval' and rec.receive_customer == False:
+                self.x= True
+
 
     def action_cancel(self):
         for rec in self:

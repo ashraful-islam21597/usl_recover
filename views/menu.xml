@@ -20,5 +20,11 @@
               name="Task Manager"
               parent="menu_field_service_root"
               sequence="25"/>
+<!--    <menuitem id="menu_quality_assurance"-->
+<!--              name="Quality Assurance"-->
+<!--              parent="menu_field_service_root"-->
+<!--              sequence="25"/>-->
+
+
 
 </odoo>

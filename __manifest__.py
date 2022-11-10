@@ -17,8 +17,6 @@
         'data/data.xml',
         'views/menu.xml',
 
-        'views/field_service_view.xml',
-
         'views/field_service_data_view.xml',
         'views/service_type_view.xml',
         'views/warranty_void_reason_view.xml',
@@ -48,6 +46,9 @@
         'views/operation_receive.xml',
         'views/transfer_order_receive.xml',
         'views/transfer_order_receive_operation.xml',
+        'views/field_service_view.xml',
+        'views/quality_check_list_view.xml',
+        'views/quality_assurance_details_view.xml'
 
     ],
     'assets': {
