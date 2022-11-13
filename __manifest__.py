@@ -43,12 +43,12 @@
         'views/item_requisition_non_warranty_view_inherit.xml',
         'views/reason_type_view.xml',
         'views/operation.xml',
-        'views/operation_receive.xml',
         'views/transfer_order_receive.xml',
         'views/transfer_order_receive_operation.xml',
-        'views/field_service_view.xml',
+
         'views/quality_check_list_view.xml',
-        'views/quality_assurance_details_view.xml'
+        'views/quality_assurance_details_view.xml',
+        'views/field_service_view.xml',
 
     ],
     'assets': {

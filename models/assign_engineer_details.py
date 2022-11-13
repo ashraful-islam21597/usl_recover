@@ -47,6 +47,7 @@ class AssignEngineerLines(models.Model):
     # engineer_name = fields.Many2one('assign.engineer', required=True, string="Engineer ID" )
     # domain = lambda self: [("groups_id", "=", self.env.ref("usl_service_erp.group_service_engineer").id)]
     # engineer_name = fields.Many2one('res.users', string="Engineer", domain=lambda self: self._get_user_domain())
+
     engineer_name = fields.Many2one('res.users', string="Engineer", domain="[('id','in',engineer_name_domain)]")
     # engineer_name1 = fields.Many2one(related='engineer_name.engineer_name', string="Engineer Name")
     # engineer_task = fields.Integer(related='engineer_name.task_count', string="Task")

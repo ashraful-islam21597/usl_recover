@@ -7,26 +7,26 @@
             <tree>
                 <field name="order_id"/>
                 <field name="order_date"/>
-<!--                <field name="branch_name"/>-->
+                <!--                <field name="branch_name"/>-->
                 <field name="retail" optional="hide"/>
-<!--                <field name="communication_media" optional="hide"/>-->
-<!--                <field name="service_type" optional="hide"/>-->
-<!--                <field name="in_attachment" optional="hide"/>-->
-<!--                <field name="imei_no"/>-->
-<!--                <field name="repair_status"/>-->
-<!--                <field name="invoice" optional="hide"/>-->
-<!--                <field name="p_date" optional="hide"/>-->
-<!--                <field name="product_id" optional="hide"/>-->
-<!--                <field name="customer_id"/>-->
-<!--                <field name="warranty_status" optional="hide"/>-->
-<!--                <field name="warranty_expiry_date_l" optional="hide"/>-->
-<!--                <field name="warranty_expiry_date_p" optional="hide"/>-->
-<!--                <field name="guaranty_expiry_date" optional="hide"/>-->
-<!--                <field name="warranty_void_reason_1" optional="hide"/>-->
-<!--                <field name="departments"/>-->
-<!--                <field name="priority_levels" optional="hide"/>-->
-<!--                <field name="p_delivery_date"/>-->
-<!--                <field name="customer_remark" optional="hide"/>-->
+                <!--                <field name="communication_media" optional="hide"/>-->
+                <!--                <field name="service_type" optional="hide"/>-->
+                <!--                <field name="in_attachment" optional="hide"/>-->
+                <!--                <field name="imei_no"/>-->
+                <!--                <field name="repair_status"/>-->
+                <!--                <field name="invoice" optional="hide"/>-->
+                <!--                <field name="p_date" optional="hide"/>-->
+                <!--                <field name="product_id" optional="hide"/>-->
+                <!--                <field name="customer_id"/>-->
+                <!--                <field name="warranty_status" optional="hide"/>-->
+                <!--                <field name="warranty_expiry_date_l" optional="hide"/>-->
+                <!--                <field name="warranty_expiry_date_p" optional="hide"/>-->
+                <!--                <field name="guaranty_expiry_date" optional="hide"/>-->
+                <!--                <field name="warranty_void_reason_1" optional="hide"/>-->
+                <!--                <field name="departments"/>-->
+                <!--                <field name="priority_levels" optional="hide"/>-->
+                <!--                <field name="p_delivery_date"/>-->
+                <!--                <field name="customer_remark" optional="hide"/>-->
             </tree>
         </field>
     </record>
@@ -65,13 +65,13 @@
                                        force_save="1" readonly="1"/>
                             </div>
                         </div>
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="service_type"/>-->
-<!--                            <div>-->
-<!--                                <field name="service_type" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <div class="col col-md-2">
+                            <label for="service_type"/>
+                            <div>
+                                <field name="service_type" class="oe_inline"
+                                       force_save="1" readonly="1"/>
+                            </div>
+                        </div>
                         <div class="col col-md-2">
                             <label for="p_date"/>
                             <div>
@@ -84,7 +84,7 @@
                         <div class="col col-md-2">
                             <label for="imei_no"/>
                             <div>
-                                <field name="imei_no" force_save="1" class="oe_inline"/>
+                                <field name="imei_no" force_save="1" readonly="1" class="oe_inline"/>
                             </div>
                         </div>
 
@@ -98,22 +98,22 @@
                         <div class="col col-md-2">
                             <label for="product_id"/>
                             <div>
-                                <field name="product_id" class="oe_inline" force_save="1"
-                                       />
+                                <field name="product_id" class="oe_inline" force_save="1" readonly="1"
+                                />
                             </div>
                         </div>
                         <div class="col col-md-2">
                             <label for="customer_id"/>
                             <div>
-                                <field name="customer_id" class="oe_inline" force_save="1"
-                                       />
+                                <field name="customer_id" class="oe_inline" force_save="1" readonly="1"
+                                />
                             </div>
                         </div>
                         <div class="col col-md-2">
                             <label for="warranty_status"/>
                             <div>
-                                <field name="warranty_status" class="oe_inline" force_save="1"
-                                       />
+                                <field name="warranty_status" class="oe_inline" force_save="1" readonly="1"
+                                />
                             </div>
                         </div>
                         <div class="col col-md-2">
@@ -176,15 +176,15 @@
                                        force_save="1" readonly="1"/>
                             </div>
                         </div>
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="priority"/>-->
-<!--                            <div>-->
-<!--                                <h3>-->
-<!--                                    <field name="priority" widget="priority" class="oe_inline"-->
-<!--                                           force_save="1" readonly="1"/>-->
-<!--                                </h3>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--                        <div class="col col-md-2">-->
+                        <!--                            <label for="priority"/>-->
+                        <!--                            <div>-->
+                        <!--                                <h3>-->
+                        <!--                                    <field name="priority" widget="priority" class="oe_inline"-->
+                        <!--                                           force_save="1" readonly="1"/>-->
+                        <!--                                </h3>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                         <div class="col col-md-2">
                             <label for="order_date"/>
                             <div>
@@ -205,13 +205,13 @@
                                        force_save="1" readonly="1"/>
                             </div>
                         </div>
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="is_sms"/>-->
-<!--                            <div>-->
-<!--                                <field name="is_sms" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <!--                        <div class="col col-md-2">-->
+                        <!--                            <label for="is_sms"/>-->
+                        <!--                            <div>-->
+                        <!--                                <field name="is_sms" class="oe_inline"-->
+                        <!--                                       force_save="1" readonly="1"/>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
                     </div>
                     <div class="row d-flex">
                         <div class="col col-md-6">
@@ -221,65 +221,91 @@
                                        force_save="1" readonly="1"/>
                             </div>
                         </div>
-                        <div class="col col-md-6">
+
                             <label for="customer_remark"/>
                             <div>
                                 <field name="customer_remark" style="width:100% !important;" class="oe_inline"
                                        force_save="1" readonly="1"/>
                             </div>
                         </div>
+                        <div class="col col-md-6">
+                        <group>
+                            <field name="qc_category"/>
+                        </group>
+
+
+
+
                     </div>
                     <notebook>
                         <page string="QA Check List">
-                            <field name="qc_line_ids" force_save="1" readonly="1">
+
+                            <field name="qc_line_ids">
                                 <tree editable="bottom">
-                                    <field name="name" readonly="1"/>
-                                    <field name="description"/>
+                                    <field name="name"/>
+                                    <field name="description1"/>
+                                    <field name="checked"/>
 
                                 </tree>
                                 <form>
                                     <group>
                                         <group>
-                                             <field name="name" readonly="1"/>
-                                    <field name="description"/>
+
+                                        </group>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="description"/>
+                                            <field name="checked"/>
                                         </group>
                                     </group>
                                 </form>
                             </field>
                         </page>
-<!--                        <page string="Special Note">-->
-<!--                            <field name="special_notes_ids">-->
-<!--                                <tree editable="bottom">-->
-<!--                                    <field name="sl_no" readonly="1"/>-->
-<!--                                    <field name="wui"/>-->
-<!--                                    <field name="wup"/>-->
-<!--                                    <field name="bui"/>-->
-<!--                                    <field name="bup"/>-->
-<!--                                </tree>-->
-<!--                                <form>-->
-<!--                                    <group>-->
-<!--                                        <group>-->
-<!--                                            <field name="sl_no" readonly="1"/>-->
-<!--                                            <field name="wui"/>-->
-<!--                                            <field name="wup"/>-->
-<!--                                        </group>-->
-<!--                                        <group>-->
-<!--                                            <field name="bui"/>-->
-<!--                                            <field name="bup"/>-->
-<!--                                        </group>-->
-<!--                                    </group>-->
-<!--                                </form>-->
-<!--                            </field>-->
-<!--                        </page>-->
+                        <page string="Quality Assurance Details">
+                            <field name="qa_details_ids">
+                                <tree editable="bottom">
+                                    <field name="order_id"/>
+                                    <field name="product_id"/>
+                                    <field name="warranty_status"/>
+                                    <field name="symptoms"/>
+                                    <field name="problem"/>
+                                    <field name="diagonisis_date"/>
+                                    <field name="service_charge"/>
+                                    <field name="total_amount"/>
+                                    <field name="customer_confirmaation"/>
+                                    <field name="task_status"/>
+                                    <field name="remarks"/>
+                                    <field name="qa_status"/>
+                                    <field name="qa_comments"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="order_id"/>
+                                            <field name="product_id"/>
+                                            <field name="warranty_status"/>
+                                            <field name="symptoms"/>
+                                            <field name="problem"/>
+                                            <field name="diagonisis_date"/>
+                                            <field name="service_charge"/>
+                                            <field name="total_amount"/>
+                                            <field name="customer_confirmaation"/>
+                                            <field name="task_status"/>
+                                            <field name="remarks"/>
+                                            <field name="qa_status"/>
+                                            <field name="qa_comments"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+
+
+
                     </notebook>
 
                 </sheet>
 
-<!--                <div class="oe_chatter">-->
-<!--                    <field name="message_follower_ids" groups="base.group_user"/>-->
-<!--                    <field name="activity_ids"/>-->
-<!--                    <field name="message_ids"/>-->
-<!--                </div>-->
             </form>
         </field>
     </record>
@@ -298,121 +324,57 @@
 
     <menuitem id="menu_quality_assurance"
               name="Service Order Quality Control"
-              parent="menu_field_service_master"
+              parent="menu_task_manager"
               action="action_service_order_quality"
               sequence="10"/>
 
-<!--    <menuitem id="menu_qc_category"-->
-<!--              name="Qc Category"-->
-<!--              parent="menu_field_service_master"-->
-<!--              action="action_qc_Category"-->
-<!--              sequence="100"/>-->
 
 </odoo>
 <!--<?xml version="1.0" encoding="utf-8"?>-->
 <!--<odoo>-->
-<!--    <record id="view_field_service_tree" model="ir.ui.view">-->
-<!--        <field name="model">field.service</field>-->
+<!--    <record id="view_service_order_quality_tree" model="ir.ui.view">-->
+<!--        <field name="model">quality.assurance.tree</field>-->
+<!--        <field name="model">quality.assurance</field>-->
 <!--        <field name="arch" type="xml">-->
 <!--            <tree>-->
-<!--                <field name="order_no"/>-->
+<!--                <field name="order_id"/>-->
 <!--                <field name="order_date"/>-->
-<!--                <field name="branch_name"/>-->
+<!--&lt;!&ndash;                <field name="branch_name"/>&ndash;&gt;-->
 <!--                <field name="retail" optional="hide"/>-->
-<!--                <field name="communication_media" optional="hide"/>-->
-<!--                <field name="service_type" optional="hide"/>-->
-<!--                <field name="in_attachment" optional="hide"/>-->
-<!--                <field name="imei_no"/>-->
-<!--                <field name="repair_status"/>-->
-<!--                <field name="invoice" optional="hide"/>-->
-<!--                <field name="p_date" optional="hide"/>-->
-<!--                <field name="product_id" optional="hide"/>-->
-<!--                <field name="customer_id"/>-->
-<!--                <field name="warranty_status" optional="hide"/>-->
-<!--                <field name="warranty_expiry_date_l" optional="hide"/>-->
-<!--                <field name="warranty_expiry_date_p" optional="hide"/>-->
-<!--                <field name="guaranty_expiry_date" optional="hide"/>-->
-<!--                <field name="warranty_void_reason_1" optional="hide"/>-->
-<!--                <field name="departments"/>-->
-<!--                <field name="priority_levels" optional="hide"/>-->
-<!--                <field name="p_delivery_date"/>-->
-<!--                <field name="customer_remark" optional="hide"/>-->
+<!--&lt;!&ndash;                <field name="communication_media" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="service_type" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="in_attachment" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="imei_no"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="repair_status"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="invoice" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="p_date" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="product_id" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="customer_id"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="warranty_status" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="warranty_expiry_date_l" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="warranty_expiry_date_p" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="guaranty_expiry_date" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="warranty_void_reason_1" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="departments"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="priority_levels" optional="hide"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="p_delivery_date"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="customer_remark" optional="hide"/>&ndash;&gt;-->
 <!--            </tree>-->
 <!--        </field>-->
 <!--    </record>-->
 
-<!--    <record id="view_field_service_form" model="ir.ui.view">-->
-<!--        <field name="name">field.service.form</field>-->
-<!--        <field name="model">field.service</field>-->
+<!--    <record id="view_service_order_quality_form" model="ir.ui.view">-->
+<!--        <field name="name">quality.assurance.form</field>-->
+<!--        <field name="model">quality.assurance</field>-->
 <!--        <field name="arch" type="xml">-->
 <!--            <form class="oe_form_sheet_width_wider">-->
-<!--                <header>-->
-<!--                    <button name="reset_to_draft" string="Reset To Draft" class="oe_highlight"-->
-<!--                            states="approval" type="object"/>-->
-<!--                    <button name="action_service_for_approval" string="Submit For Approval" class="oe_highlight"-->
-<!--                            states="draft" type="object"/>-->
-<!--                    <button name="action_approval" string="Approve" class="oe_highlight" states="service_for_approval"-->
-<!--                            type="object"/>-->
-<!--                    <button name="action_cancel" string="Cancel" states="draft,service_for_approval"-->
-<!--                            type="object"/>-->
-
-<!--                    <field name="state" widget="statusbar" nolabel="1"-->
-<!--                           statusbar_visible="draft,service_for_approval,approval"/>-->
-<!--                </header>-->
-
-
-
 <!--                <sheet>-->
-<!--                    <div class="oe_button_box" name="button-box" style="height:50px;">-->
-<!--&lt;!&ndash;                         <button class="button1 oe_stat_button" name="%(usl_service_erp.action_order_receive)d"  type="action" domain="[('id','=',1)]" string="Order Receive" icon="fa-check">&ndash;&gt;-->
-<!--&lt;!&ndash;                        </button>&ndash;&gt;-->
-<!--                        <button class="button1 oe_stat_button" name="%(usl_service_erp.action_order)d"  type="action" string="Order Recive" context="{'default_service_order_id':id}" icon="fa-exchange">-->
-
-<!--                        </button>-->
-<!--                        <button class="button1 oe_stat_button" name="%(usl_service_erp.action_order_transfer_new)d" context="{'default_service_order_id':id}"  type="action" string="Order Transfer"-->
-
-<!--                                icon="fa-exchange">-->
-<!--&lt;!&ndash;                            <field name="filter_service_order_id">[('service_order_id','=',[service_order_id])]</field>&ndash;&gt;-->
-<!--                        </button>-->
-
-
-<!--                        <button class="button1 oe_stat_button" type="object" string="Assign Engineer"-->
-<!--                                name="action_view_assign" icon="fa-user">-->
-<!--                        </button>-->
-<!--                        <button class="button1 oe_stat_button" type="object" string="Diagnosis and Repair"-->
-<!--                                name="action_diagnosis_repair"-->
-<!--                                icon="fa-bug">-->
-<!--                        </button>-->
-<!--                        <button class="button1 oe_stat_button" type="object" string="Item Consumption"-->
-<!--                                name="actions_test" icon="fa-wrench">-->
-<!--                        </button>-->
-<!--                        <button class="button1 oe_stat_button" type="object" string="Transport Activity"-->
-<!--                                name="actions_test" icon="fa-truck">-->
-<!--                        </button>-->
-<!--                        <button class="button1 oe_stat_button" type="object" string="Communication"-->
-<!--                                name="actions_test"-->
-<!--                                icon="fa-phone">-->
-<!--                        </button>-->
-
-
-<!--                        <button class="button1 oe_stat_button" type="object" string="Invoice" name="actions_test"-->
-<!--                                icon="fa-file">-->
-<!--                        </button>-->
-<!--                        <button class="button1 oe_stat_button" type="object" string="Delivery" name="actions_test"-->
-<!--                                icon="fa-truck">-->
-<!--                        </button>-->
-<!--                         <button class="button1 oe_stat_button" type="object" string="Remarks" name="receive_button"-->
-<!--                                icon="fa-comments-o">-->
-<!--                        </button>-->
-<!--                    </div>-->
-
-<!--                    <field name="id"/>-->
 
 <!--                    <div class="row d-flex">-->
 <!--                        <div class="col col-md-2">-->
-<!--                            <label for="order_no"/>-->
+<!--                            <label for="order_id"/>-->
 <!--                            <div>-->
-<!--                                <field name="order_no" class="oe_inline"/>-->
+<!--                                <field name="order_id" class="oe_inline"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                        <div class="col col-md-2">-->
@@ -425,8 +387,7 @@
 <!--                        <div class="col col-md-2">-->
 <!--                            <label for="retail"/>-->
 <!--                            <div>-->
-<!--                                <field name="retail" class="oe_inline" force_save="1"-->
-<!--                                       force_save="1" readonly="1"/>-->
+<!--                                <field name="retail" class="oe_inline" force_save="1"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                        <div class="col col-md-2">-->
@@ -436,17 +397,17 @@
 <!--                                       force_save="1" readonly="1"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="service_type"/>-->
-<!--                            <div>-->
-<!--                                <field name="service_type" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
+<!--&lt;!&ndash;                        <div class="col col-md-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <label for="service_type"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="service_type" class="oe_inline"&ndash;&gt;-->
+<!--&lt;!&ndash;                                       force_save="1" readonly="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
 <!--                        <div class="col col-md-2">-->
 <!--                            <label for="p_date"/>-->
 <!--                            <div>-->
-<!--                                <field name="p_date" class="oe_inline" force_save="1"-->
+<!--                                <field name="p_date" class="oe_inline"-->
 <!--                                       force_save="1" readonly="1"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
@@ -455,15 +416,14 @@
 <!--                        <div class="col col-md-2">-->
 <!--                            <label for="imei_no"/>-->
 <!--                            <div>-->
-<!--                                <field name="imei_no" force_save="1" class="oe_inline"-->
-<!--                                       attrs="{'readonly': [('id', '!=', False),('state', '=', 'approval')]}"/>-->
+<!--                                <field name="imei_no" force_save="1" class="oe_inline"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
 
 <!--                        <div class="col col-md-2">-->
 <!--                            <label for="invoice"/>-->
 <!--                            <div>-->
-<!--                                <field name="invoice" class="oe_inline" force_save="1"-->
+<!--                                <field name="invoice" class="oe_inline"-->
 <!--                                       force_save="1" readonly="1"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
@@ -471,27 +431,27 @@
 <!--                            <label for="product_id"/>-->
 <!--                            <div>-->
 <!--                                <field name="product_id" class="oe_inline" force_save="1"-->
-<!--                                       force_save="1" readonly="1"/>-->
+<!--                                       />-->
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                        <div class="col col-md-2">-->
 <!--                            <label for="customer_id"/>-->
 <!--                            <div>-->
 <!--                                <field name="customer_id" class="oe_inline" force_save="1"-->
-<!--                                       force_save="1" readonly="1"/>-->
+<!--                                       />-->
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                        <div class="col col-md-2">-->
 <!--                            <label for="warranty_status"/>-->
 <!--                            <div>-->
 <!--                                <field name="warranty_status" class="oe_inline" force_save="1"-->
-<!--                                       force_save="1" readonly="1"/>-->
+<!--                                       />-->
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                        <div class="col col-md-2">-->
 <!--                            <label for="warranty_expiry_date_l"/>-->
 <!--                            <div>-->
-<!--                                <field name="warranty_expiry_date_l" force_save="1"-->
+<!--                                <field name="warranty_expiry_date_l"-->
 <!--                                       force_save="1" readonly="1" class="oe_inline"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
@@ -500,7 +460,7 @@
 <!--                        <div class="col col-md-2">-->
 <!--                            <label for="warranty_expiry_date_p"/>-->
 <!--                            <div>-->
-<!--                                <field name="warranty_expiry_date_p" force_save="1"-->
+<!--                                <field name="warranty_expiry_date_p"-->
 <!--                                       force_save="1" readonly="1" class="oe_inline"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
@@ -548,15 +508,15 @@
 <!--                                       force_save="1" readonly="1"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="priority"/>-->
-<!--                            <div>-->
-<!--                                <h3>-->
-<!--                                    <field name="priority" widget="priority" class="oe_inline"-->
-<!--                                           force_save="1" readonly="1"/>-->
-<!--                                </h3>-->
-<!--                            </div>-->
-<!--                        </div>-->
+<!--&lt;!&ndash;                        <div class="col col-md-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <label for="priority"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <field name="priority" widget="priority" class="oe_inline"&ndash;&gt;-->
+<!--&lt;!&ndash;                                           force_save="1" readonly="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
 <!--                        <div class="col col-md-2">-->
 <!--                            <label for="order_date"/>-->
 <!--                            <div>-->
@@ -577,13 +537,13 @@
 <!--                                       force_save="1" readonly="1"/>-->
 <!--                            </div>-->
 <!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="is_sms"/>-->
-<!--                            <div>-->
-<!--                                <field name="is_sms" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
+<!--&lt;!&ndash;                        <div class="col col-md-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <label for="is_sms"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <field name="is_sms" class="oe_inline"&ndash;&gt;-->
+<!--&lt;!&ndash;                                       force_save="1" readonly="1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
 <!--                    </div>-->
 <!--                    <div class="row d-flex">-->
 <!--                        <div class="col col-md-6">-->
@@ -602,109 +562,42 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                    <notebook>-->
-<!--                        <page string="Symptoms">-->
-<!--                            <field name="symptoms_lines_ids" force_save="1" readonly="1">-->
+<!--                        <page string="QA Check List">-->
+<!--                            <field name="qc_line_ids" force_save="1" readonly="1">-->
 <!--                                <tree editable="bottom">-->
-<!--                                    <field name="sl_no" readonly="1"/>-->
-<!--                                    <field name="symptoms"/>-->
-<!--                                    <field name="reason"/>-->
+<!--                                    <field name="name" readonly="1"/>-->
+<!--                                    <field name="description"/>-->
+
 <!--                                </tree>-->
 <!--                                <form>-->
 <!--                                    <group>-->
 <!--                                        <group>-->
-<!--                                            <field name="sl_no" readonly="1"/>-->
-<!--                                            <field name="symptoms"/>-->
-<!--                                            <field name="reason"/>-->
+<!--                                             <field name="name" readonly="1"/>-->
+<!--                                    <field name="description"/>-->
 <!--                                        </group>-->
 <!--                                    </group>-->
 <!--                                </form>-->
 <!--                            </field>-->
 <!--                        </page>-->
-<!--                        <page string="Special Note">-->
-<!--                            <field name="special_notes_ids">-->
-<!--                                <tree editable="bottom">-->
-<!--                                    <field name="sl_no" readonly="1"/>-->
-<!--                                    <field name="wui"/>-->
-<!--                                    <field name="wup"/>-->
-<!--                                    <field name="bui"/>-->
-<!--                                    <field name="bup"/>-->
-<!--                                </tree>-->
-<!--                                <form>-->
-<!--                                    <group>-->
-<!--                                        <group>-->
-<!--                                            <field name="sl_no" readonly="1"/>-->
-<!--                                            <field name="wui"/>-->
-<!--                                            <field name="wup"/>-->
-<!--                                        </group>-->
-<!--                                        <group>-->
-<!--                                            <field name="bui"/>-->
-<!--                                            <field name="bup"/>-->
-<!--                                        </group>-->
-<!--                                    </group>-->
-<!--                                </form>-->
-<!--                            </field>-->
-<!--                        </page>-->
+
 <!--                    </notebook>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="in_attachment"/>-->
-<!--                            <div>-->
-<!--                                <field name="in_attachment" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="repair_status"/>-->
-<!--                            <div>-->
-<!--                                <field name="repair_status" style="width:100%% !important;" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="item_receive_status"/>-->
-<!--                            <div>-->
-<!--                                <field name="item_receive_status" style="width:100%% !important;" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="item_receive_branch"/>-->
-<!--                            <div>-->
-<!--                                <field name="item_receive_branch" style="width:98% !important;" class="oe_inline" force_save="1"-->
-<!--                                       readonly="True"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="product_receive_date" />-->
-<!--                            <div>-->
-<!--                                <field name="product_receive_date" class="oe_inline" force_save="1" readonly="1"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="delivery_date"/>-->
-<!--                            <div>-->
-<!--                                <field name="delivery_date" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+
 <!--                </sheet>-->
 
-<!--                <div class="oe_chatter">-->
-<!--                    <field name="message_follower_ids" groups="base.group_user"/>-->
-<!--                    <field name="activity_ids"/>-->
-<!--                    <field name="message_ids"/>-->
-<!--                </div>-->
+<!--&lt;!&ndash;                <div class="oe_chatter">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="message_follower_ids" groups="base.group_user"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="activity_ids"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="message_ids"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
 <!--            </form>-->
 <!--        </field>-->
 <!--    </record>-->
 
 
-<!--    <record id="action_field_service" model="ir.actions.act_window">-->
-<!--        <field name="name">Service Order</field>-->
+<!--    <record id="action_service_order_quality" model="ir.actions.act_window">-->
+<!--        <field name="name">Service Order Quality Control</field>-->
 <!--        <field name="type">ir.actions.act_window</field>-->
-<!--        <field name="res_model">field.service</field>-->
+<!--        <field name="res_model">quality.assurance</field>-->
 <!--        <field name="view_mode">tree,form</field>-->
 <!--        <field name="context">{}</field>-->
 <!--        <field name="help" type="html">-->
@@ -712,10 +605,16 @@
 <!--        </field>-->
 <!--    </record>-->
 
-<!--    <menuitem id="menu_field_service"-->
-<!--              name="Create Service Order"-->
+<!--    <menuitem id="menu_quality_assurance"-->
+<!--              name="Service Order Quality Control"-->
 <!--              parent="menu_field_service_master"-->
-<!--              action="action_field_service"-->
+<!--              action="action_service_order_quality"-->
 <!--              sequence="10"/>-->
+
+<!--&lt;!&ndash;    <menuitem id="menu_qc_category"&ndash;&gt;-->
+<!--&lt;!&ndash;              name="Qc Category"&ndash;&gt;-->
+<!--&lt;!&ndash;              parent="menu_field_service_master"&ndash;&gt;-->
+<!--&lt;!&ndash;              action="action_qc_Category"&ndash;&gt;-->
+<!--&lt;!&ndash;              sequence="100"/>&ndash;&gt;-->
 
 <!--</odoo>-->
