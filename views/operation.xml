@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="action_operation" model="ir.actions.server">
-        <field name="name">operation</field>
-<!--         <field name="view_id" ref="usl_service_erp.view_picking_form_field_service"/>-->
-        <field name="model_id" ref="model_stock_picking"/>
-        <field name="state">code</field>
-        <field name="code">action = model.action_operation()</field>
+<!--    <record id="action_qa_operation" model="ir.actions.server">-->
+<!--        <field name="name">operation</field>-->
+<!--&lt;!&ndash;         <field name="view_id" ref="usl_service_erp.view_picking_form_field_service"/>&ndash;&gt;-->
+<!--        <field name="model_id" ref="model_quality_assurance"/>-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="code">action = model.action_qa_operation()</field>-->
 
 
-<!--        <field name="help" type="html">-->
-<!--            <p class="">Create Service Order receive</p>-->
-<!--        </field>-->
-    </record>
+<!--&lt;!&ndash;        <field name="help" type="html">&ndash;&gt;-->
+<!--&lt;!&ndash;            <p class="">Create Service Order receive</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        </field>&ndash;&gt;-->
+<!--    </record>-->
 
-<!--    <menuitem id="menu_operation"-->
-<!--              name="Service Order Transfer Test"-->
-<!--              action="action_operation"-->
-<!--              parent="menu_field_service_master"-->
-<!--              sequence="30"/>-->
+<!--<menuitem id="menu_quality_assurance"-->
+<!--              name="My Task QA"-->
+<!--              parent="menu_task_manager"-->
+<!--              action="action_qa_operation"-->
+<!--              sequence="100"/>-->
 </odoo>
 
 <!--<?xml version="1.0" encoding="utf-8"?>-->

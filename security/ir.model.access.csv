@@ -21,7 +21,7 @@ access.order_transfer_lines,access_order_transfer_lines,usl_service_erp.model_or
 access.reasons_type,access_reasons_type,usl_service_erp.model_reasons_type,base.group_user,1,1,1,1
 access.quality_list,access_quality_list,usl_service_erp.model_quality_list,base.group_user,1,1,1,1
 access.quality_list_lines,access_quality_list_lines,usl_service_erp.model_quality_list_lines,base.group_user,1,1,1,1
-access.quality_assurance,access_quality_assurance,usl_service_erp.model_quality_assurance,base.group_user,1,1,1,1
+
 access.quality_assurance_details,access_quality_assurance,usl_service_erp.model_quality_assurance_details,base.group_user,1,1,1,1
 access.quality_assurance_lines,access_quality_assurance_lines,usl_service_erp.model_quality_assurance_lines,base.group_user,1,1,1,1
 

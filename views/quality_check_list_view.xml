@@ -28,7 +28,7 @@
 
                                         <field name="name"/>
 
-                                        <field name="category_id"/>
+
 
                                 </tree>
                                 <form>
@@ -37,9 +37,7 @@
                                         <group>
                                             <field name="name"/>
                                         </group>
-                                        <group>
-                                            <field name="category_id"/>
-                                        </group>
+
                                     </group>
                                 </form>
                             </field>
@@ -71,10 +69,10 @@
     </record>
 
     <menuitem id="menu_qc_category"
-              name="Qc Category"
+              name="Ready For QA"
               parent="configuration_main_menu"
               action="action_qc_Category"
-              sequence="100"/>
+              sequence="200"/>
 
 </odoo>
 <!--<?xml version="1.0" encoding="utf-8"?>-->

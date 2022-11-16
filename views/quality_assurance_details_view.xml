@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_service_order_quality_tree" model="ir.ui.view">
-        <field name="model">quality.assurance.tree</field>
-        <field name="model">quality.assurance</field>
+        <field name="name">field.service.inherit.tree</field>
+        <field name="model">field.service</field>
+        <field name="priority" eval="70"/>
         <field name="arch" type="xml">
-            <tree>
-                <field name="order_id"/>
+            <tree create="0">
+                <field name="order_no"/>
+
+                <field name="current_branch"/>
+                <field name="departments"/>
                 <field name="order_date"/>
-                <!--                <field name="branch_name"/>-->
                 <field name="retail" optional="hide"/>
-                <!--                <field name="communication_media" optional="hide"/>-->
-                <!--                <field name="service_type" optional="hide"/>-->
-                <!--                <field name="in_attachment" optional="hide"/>-->
-                <!--                <field name="imei_no"/>-->
-                <!--                <field name="repair_status"/>-->
-                <!--                <field name="invoice" optional="hide"/>-->
-                <!--                <field name="p_date" optional="hide"/>-->
-                <!--                <field name="product_id" optional="hide"/>-->
-                <!--                <field name="customer_id"/>-->
-                <!--                <field name="warranty_status" optional="hide"/>-->
-                <!--                <field name="warranty_expiry_date_l" optional="hide"/>-->
-                <!--                <field name="warranty_expiry_date_p" optional="hide"/>-->
-                <!--                <field name="guaranty_expiry_date" optional="hide"/>-->
-                <!--                <field name="warranty_void_reason_1" optional="hide"/>-->
-                <!--                <field name="departments"/>-->
-                <!--                <field name="priority_levels" optional="hide"/>-->
-                <!--                <field name="p_delivery_date"/>-->
-                <!--                <field name="customer_remark" optional="hide"/>-->
+                <field name="product_id"/>
+                <field name="imei_no"/>
+                <field name="communication_media" optional="hide"/>
+                <field name="p_delivery_date"/>
+                <field name="item_receive_status"/>
+                <field name="product_receive_date"/>
+                <field name="item_receive_branch"/>
+                <field name="warranty_status"/>
+                <field name="so_transfer"/>
+                <field name="repair_status"/>
+                <field name="invoice" optional="hide"/>
+                <field name="p_date" optional="hide"/>
+                <field name="customer_id"/>
+                <field name="warranty_expiry_date_l" optional="hide"/>
+                <field name="warranty_expiry_date_p" optional="hide"/>
+                <field name="guaranty_expiry_date" optional="hide"/>
+                <field name="warranty_void_reason_1" optional="hide"/>
+                <field name="customer_remark" optional="hide"/>
             </tree>
         </field>
     </record>
 
     <record id="view_service_order_quality_form" model="ir.ui.view">
-        <field name="name">quality.assurance.form</field>
-        <field name="model">quality.assurance</field>
+        <field name="name">field.service.form</field>
+        <field name="model">field.service</field>
         <field name="arch" type="xml">
             <form class="oe_form_sheet_width_wider">
                 <sheet>
 
                     <div class="row d-flex">
                         <div class="col col-md-2">
-                            <label for="order_id"/>
+                            <label for="order_no"/>
                             <div>
-                                <field name="order_id" class="oe_inline"/>
+                                <field name="order_no" class="oe_inline"/>
                             </div>
                         </div>
                         <div class="col col-md-2">
@@ -170,50 +173,26 @@
                     </div>
                     <div class="row d-flex">
                         <div class="col col-md-2">
-                            <label for="priority_lavel_duration"/>
-                            <div>
-                                <field name="priority_lavel_duration" class="oe_inline"
-                                       force_save="1" readonly="1"/>
-                            </div>
-                        </div>
-                        <!--                        <div class="col col-md-2">-->
-                        <!--                            <label for="priority"/>-->
-                        <!--                            <div>-->
-                        <!--                                <h3>-->
-                        <!--                                    <field name="priority" widget="priority" class="oe_inline"-->
-                        <!--                                           force_save="1" readonly="1"/>-->
-                        <!--                                </h3>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-                        <div class="col col-md-2">
                             <label for="order_date"/>
                             <div>
                                 <field name="order_date" class="oe_inline"/>
                             </div>
                         </div>
                         <div class="col col-md-2">
-                            <label for="so_transfer"/>
+                            <label for="item_receive_branch"/>
                             <div>
-                                <field name="so_transfer" class="oe_inline"
-                                       force_save="1" readonly="1"/>
+                                <field name="item_receive_branch" style="width:98% !important;" class="oe_inline"
+                                       force_save="1"
+                                       readonly="True"/>
                             </div>
                         </div>
                         <div class="col col-md-2">
-                            <label for="receive_customer"/>
+                            <label for="product_receive_date"/>
                             <div>
-                                <field name="receive_customer" class="oe_inline"
-                                       force_save="1" readonly="1"/>
+                                <field name="product_receive_date" class="oe_inline" force_save="1" readonly="1"
+                                />
                             </div>
                         </div>
-                        <!--                        <div class="col col-md-2">-->
-                        <!--                            <label for="is_sms"/>-->
-                        <!--                            <div>-->
-                        <!--                                <field name="is_sms" class="oe_inline"-->
-                        <!--                                       force_save="1" readonly="1"/>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
-                    </div>
-                    <div class="row d-flex">
                         <div class="col col-md-6">
                             <label for="remark"/>
                             <div>
@@ -222,23 +201,19 @@
                             </div>
                         </div>
 
-                            <label for="customer_remark"/>
-                            <div>
-                                <field name="customer_remark" style="width:100% !important;" class="oe_inline"
-                                       force_save="1" readonly="1"/>
-                            </div>
-                        </div>
-                        <div class="col col-md-6">
-                        <group>
-                            <field name="qc_category"/>
-                        </group>
-
-
-
-
                     </div>
+                    <div class="row d-flex">
+                    </div>
+
                     <notebook>
                         <page string="QA Check List">
+                            <div class="col-md-4">
+                                <group>
+                                    <field name="qc_category"/>
+                                </group>
+
+
+                            </div>
 
                             <field name="qc_line_ids">
                                 <tree editable="bottom">
@@ -262,7 +237,7 @@
                             </field>
                         </page>
                         <page string="Quality Assurance Details">
-                            <field name="qa_details_ids">
+                            <field name="qa_details_ids" force_save="1">
                                 <tree editable="bottom">
                                     <field name="order_id"/>
                                     <field name="product_id"/>
@@ -276,6 +251,7 @@
                                     <field name="task_status"/>
                                     <field name="remarks"/>
                                     <field name="qa_status"/>
+                                    <field name="qa_result"/>
                                     <field name="qa_comments"/>
                                 </tree>
                                 <form>
@@ -293,13 +269,13 @@
                                             <field name="task_status"/>
                                             <field name="remarks"/>
                                             <field name="qa_status"/>
+                                            <field name="qa_result"/>
                                             <field name="qa_comments"/>
                                         </group>
                                     </group>
                                 </form>
                             </field>
                         </page>
-
 
 
                     </notebook>
@@ -311,310 +287,17 @@
     </record>
 
 
-    <record id="action_service_order_quality" model="ir.actions.act_window">
-        <field name="name">Service Order Quality Control</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">quality.assurance</field>
-        <field name="view_mode">tree,form</field>
-        <field name="context">{}</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Create your fast field service !</p>
-        </field>
+    <record id="action_service_order_quality" model="ir.actions.server">
+        <field name="name">My Task QA</field>
+        <field name="model_id" ref="model_field_service"/>
+        <field name="state">code</field>
+        <field name="code">action = model._quality_assurance_view_render()</field>
+
     </record>
 
     <menuitem id="menu_quality_assurance"
-              name="Service Order Quality Control"
+              name="My Task QA"
               parent="menu_task_manager"
               action="action_service_order_quality"
-              sequence="10"/>
-
-
+              sequence="100"/>
 </odoo>
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<odoo>-->
-<!--    <record id="view_service_order_quality_tree" model="ir.ui.view">-->
-<!--        <field name="model">quality.assurance.tree</field>-->
-<!--        <field name="model">quality.assurance</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <tree>-->
-<!--                <field name="order_id"/>-->
-<!--                <field name="order_date"/>-->
-<!--&lt;!&ndash;                <field name="branch_name"/>&ndash;&gt;-->
-<!--                <field name="retail" optional="hide"/>-->
-<!--&lt;!&ndash;                <field name="communication_media" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="service_type" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="in_attachment" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="imei_no"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="repair_status"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="invoice" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="p_date" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="product_id" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="customer_id"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="warranty_status" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="warranty_expiry_date_l" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="warranty_expiry_date_p" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="guaranty_expiry_date" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="warranty_void_reason_1" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="departments"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="priority_levels" optional="hide"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="p_delivery_date"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                <field name="customer_remark" optional="hide"/>&ndash;&gt;-->
-<!--            </tree>-->
-<!--        </field>-->
-<!--    </record>-->
-
-<!--    <record id="view_service_order_quality_form" model="ir.ui.view">-->
-<!--        <field name="name">quality.assurance.form</field>-->
-<!--        <field name="model">quality.assurance</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <form class="oe_form_sheet_width_wider">-->
-<!--                <sheet>-->
-
-<!--                    <div class="row d-flex">-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="order_id"/>-->
-<!--                            <div>-->
-<!--                                <field name="order_id" class="oe_inline"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="branch_name"/>-->
-<!--                            <div>-->
-<!--                                <field name="branch_name" class="oe_inline" force_save="1"-->
-<!--                                       readonly="True"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="retail"/>-->
-<!--                            <div>-->
-<!--                                <field name="retail" class="oe_inline" force_save="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="communication_media"/>-->
-<!--                            <div>-->
-<!--                                <field name="communication_media" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--&lt;!&ndash;                        <div class="col col-md-2">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <label for="service_type"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <field name="service_type" class="oe_inline"&ndash;&gt;-->
-<!--&lt;!&ndash;                                       force_save="1" readonly="1"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="p_date"/>-->
-<!--                            <div>-->
-<!--                                <field name="p_date" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row d-flex">-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="imei_no"/>-->
-<!--                            <div>-->
-<!--                                <field name="imei_no" force_save="1" class="oe_inline"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="invoice"/>-->
-<!--                            <div>-->
-<!--                                <field name="invoice" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="product_id"/>-->
-<!--                            <div>-->
-<!--                                <field name="product_id" class="oe_inline" force_save="1"-->
-<!--                                       />-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="customer_id"/>-->
-<!--                            <div>-->
-<!--                                <field name="customer_id" class="oe_inline" force_save="1"-->
-<!--                                       />-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="warranty_status"/>-->
-<!--                            <div>-->
-<!--                                <field name="warranty_status" class="oe_inline" force_save="1"-->
-<!--                                       />-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="warranty_expiry_date_l"/>-->
-<!--                            <div>-->
-<!--                                <field name="warranty_expiry_date_l"-->
-<!--                                       force_save="1" readonly="1" class="oe_inline"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row d-flex">-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="warranty_expiry_date_p"/>-->
-<!--                            <div>-->
-<!--                                <field name="warranty_expiry_date_p"-->
-<!--                                       force_save="1" readonly="1" class="oe_inline"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="guaranty_expiry_date"/>-->
-<!--                            <div>-->
-<!--                                <field name="guaranty_expiry_date" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="warranty_void_reason_1"/>-->
-<!--                            <div>-->
-<!--                                <field name="warranty_void_reason_1" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="departments"/>-->
-<!--                            <div>-->
-<!--                                <field name="departments" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="phone"/>-->
-<!--                            <div>-->
-<!--                                <field name="phone" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="p_delivery_date"/>-->
-<!--                            <div>-->
-<!--                                <field name="p_delivery_date" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row d-flex">-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="priority_lavel_duration"/>-->
-<!--                            <div>-->
-<!--                                <field name="priority_lavel_duration" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--&lt;!&ndash;                        <div class="col col-md-2">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <label for="priority"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <h3>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <field name="priority" widget="priority" class="oe_inline"&ndash;&gt;-->
-<!--&lt;!&ndash;                                           force_save="1" readonly="1"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </h3>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="order_date"/>-->
-<!--                            <div>-->
-<!--                                <field name="order_date" class="oe_inline"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="so_transfer"/>-->
-<!--                            <div>-->
-<!--                                <field name="so_transfer" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-2">-->
-<!--                            <label for="receive_customer"/>-->
-<!--                            <div>-->
-<!--                                <field name="receive_customer" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--&lt;!&ndash;                        <div class="col col-md-2">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <label for="is_sms"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <field name="is_sms" class="oe_inline"&ndash;&gt;-->
-<!--&lt;!&ndash;                                       force_save="1" readonly="1"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    <div class="row d-flex">-->
-<!--                        <div class="col col-md-6">-->
-<!--                            <label for="remark"/>-->
-<!--                            <div>-->
-<!--                                <field name="remark" style="width:100% !important;" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col col-md-6">-->
-<!--                            <label for="customer_remark"/>-->
-<!--                            <div>-->
-<!--                                <field name="customer_remark" style="width:100% !important;" class="oe_inline"-->
-<!--                                       force_save="1" readonly="1"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <notebook>-->
-<!--                        <page string="QA Check List">-->
-<!--                            <field name="qc_line_ids" force_save="1" readonly="1">-->
-<!--                                <tree editable="bottom">-->
-<!--                                    <field name="name" readonly="1"/>-->
-<!--                                    <field name="description"/>-->
-
-<!--                                </tree>-->
-<!--                                <form>-->
-<!--                                    <group>-->
-<!--                                        <group>-->
-<!--                                             <field name="name" readonly="1"/>-->
-<!--                                    <field name="description"/>-->
-<!--                                        </group>-->
-<!--                                    </group>-->
-<!--                                </form>-->
-<!--                            </field>-->
-<!--                        </page>-->
-
-<!--                    </notebook>-->
-
-<!--                </sheet>-->
-
-<!--&lt;!&ndash;                <div class="oe_chatter">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <field name="message_follower_ids" groups="base.group_user"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <field name="activity_ids"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <field name="message_ids"/>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--            </form>-->
-<!--        </field>-->
-<!--    </record>-->
-
-
-<!--    <record id="action_service_order_quality" model="ir.actions.act_window">-->
-<!--        <field name="name">Service Order Quality Control</field>-->
-<!--        <field name="type">ir.actions.act_window</field>-->
-<!--        <field name="res_model">quality.assurance</field>-->
-<!--        <field name="view_mode">tree,form</field>-->
-<!--        <field name="context">{}</field>-->
-<!--        <field name="help" type="html">-->
-<!--            <p class="o_view_nocontent_smiling_face">Create your fast field service !</p>-->
-<!--        </field>-->
-<!--    </record>-->
-
-<!--    <menuitem id="menu_quality_assurance"-->
-<!--              name="Service Order Quality Control"-->
-<!--              parent="menu_field_service_master"-->
-<!--              action="action_service_order_quality"-->
-<!--              sequence="10"/>-->
-
-<!--&lt;!&ndash;    <menuitem id="menu_qc_category"&ndash;&gt;-->
-<!--&lt;!&ndash;              name="Qc Category"&ndash;&gt;-->
-<!--&lt;!&ndash;              parent="menu_field_service_master"&ndash;&gt;-->
-<!--&lt;!&ndash;              action="action_qc_Category"&ndash;&gt;-->
-<!--&lt;!&ndash;              sequence="100"/>&ndash;&gt;-->
-
-<!--</odoo>-->

@@ -186,12 +186,12 @@
                                        attrs="{'invisible': [('picking_type_code', 'in', ['incoming', 'outgoing'])]}"/>
                             </div>
                             <field name="partner_id" nolabel="1"/>
-                            <field name="picking_type_id" force_save="1" readonly="1"
+                            <field name="picking_type_id" force_save="1"
                                    attrs="{'invisible': [('hide_picking_type', '=', True)]}"/>
                             <field name="location_id" force_save="1" readonly="1" options="{'no_create': True}"
                                    groups="stock.group_stock_multi_locations"
                                    attrs="{'invisible': [('picking_type_code', '=', 'incoming')]}"/>
-                            <field name="location_dest_id" readonly="1" force_save="0" options="{'no_create': False}"
+                            <field name="location_dest_id"  force_save="0" options="{'no_create': False}"
                                    groups="stock.group_stock_multi_locations"
                                    attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}"/>
                             <field name="backorder_id" attrs="{'invisible': [('backorder_id','=',False)]}"/>
@@ -224,7 +224,7 @@
                             <field name="transfer_to_branch" force_save="1" required="1"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'internal')]}"/>
                             <!--                            <field name="origin" placeholder="e.g. PO0032"/>-->
-                             <field name="service_order_id" domain="[('x','=',True)('so_transfer','=',False)]" required="1" readonly="1"  force_save="1"/>
+                             <field name="service_order_id" domain="[('x','=',True)('so_transfer','=',False)]" required="1"  force_save="1"/>
                             <field name="owner_id" groups="stock.group_tracking_owner"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'incoming')]}"/>
                         </group>
