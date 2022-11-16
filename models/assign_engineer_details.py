@@ -13,7 +13,7 @@ class AssignEngineerDetails(models.Model):
     assign_engineer_lines_ids = fields.One2many('assign.engineer.lines', 'engineer_id', string="Assign Engineer")
     order_id = fields.Many2one('field.service', string="Service Order", readonly=True)
     contact = fields.Char(related="order_id.phone", string='Contact No', readonly=True)
-    # assign_engineer_lines_id = fields.Many2one('assign.engineer.lines', string="Engineer")
+    #assign_engineer_lines_id = fields.Many2one('assign.engineer.lines', string="Engineer")
     is_qa = fields.Char(string="Is QA?")
     qa_result = fields.Char(string="QA Result")
     qa = fields.Char(string="QA")

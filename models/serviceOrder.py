@@ -261,22 +261,20 @@ class FieldService(models.Model):
         return res
 
     def action_view_assign(self):
-        data = self.env['assign.engineer.details'].search([('order_id', '=', self.id)])
 
-        if data:
-            print('succes')
-        else:
-            print("create")
-            self.env['assign.engineer.details'].create({'order_id': self.id})
-        data = self.env['assign.engineer.details'].search([('order_id', '=', self.id)])
-
-        print("**********", data)
-        return {
-            'type': 'ir.actions.act_url',
-            'target': 'self',
-            'url': f"/web#id={data.id}&cids=1&menu_id=316&action=437&model=assign.engineer.details&view_type=form"
-
-        }
+        engineers = self.env['assign.engineer.details'].search([('order_id', '=', self.id)])
+        result = self.env["ir.actions.actions"]._for_xml_id('usl_service_erp.action_assign_engineer_details')
+        # override the context to get rid of the default filtering on operation type
+        result['context'] = {'default_order_id': self.id}
+        # choose the view_mode accordingly
+        if not engineers or len(engineers) > 1:
+            result['domain'] = [('id', 'in', engineers.ids)]
+        elif len(engineers) == 1:
+            res = self.env.ref('usl_service_erp.view_assign_engineer_details_form', False)
+            form_view = [(res and res.id or False, 'form')]
+            result['views'] = form_view + [(state, view) for state, view in result.get('views', []) if view != 'form']
+            result['res_id'] = engineers.id
+        return result
 
     def action_diagnosis_repair(self):
 

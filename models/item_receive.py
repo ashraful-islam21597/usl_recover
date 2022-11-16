@@ -84,14 +84,17 @@ class StockPickingOperation(models.Model):
             ('company_id', '=', user.company_id.id),
 
         ])
-        # contact_person=self.env['res.partner'].search([('branch_id','=',self.transfer_to_branch)])
-        # print(contact_person.name)
+        contact_person=self.env['res.users'].search([('branch_id','=',self.transfer_to_branch.id)])
+        contact_person = self.env['res.users'].search([('branch_id', '=', self.transfer_to_branch.id)])
+        print(contact_person.name)
+        #contact_person = self.env['res.partner'].search([('user_id', '=', contact_person.id)])
+        print(contact_person.name)
         s = self.env['stock.picking.type'].search(
             [('warehouse_id', '=', warehouse_data.id),
              ('code', '=', 'incoming')], limit=1).default_location_dest_id
         if s:
             self.location_dest_id = s
-            # self.partner_id=contact_person.name
+            self.partner_id=contact_person.partner_id
 
     @api.model
     def create(self, vals):
@@ -109,7 +112,7 @@ class StockPickingOperation(models.Model):
         if res.picking_type_id.code == 'incoming':
             so.receive_customer = True
             so.product_receive_date = res.scheduled_date
-            so.x = True
+
             so.item_receive_status = "Received"
             so.product_receive_date = res.scheduled_date
             print(so.product_receive_date, self.scheduled_date)
