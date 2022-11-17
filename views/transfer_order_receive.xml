@@ -2,8 +2,9 @@
 <odoo>
 
     <record id="view_picking_tree_field_service_transfer_order_receive" model="ir.ui.view">
-        <field name="name">stock.picking.tree</field>
+        <field name="name">stock.picking.inherit.tree</field>
         <field name="model">stock.picking</field>
+         <field name="priority" eval="70"/>
         <field name="arch" type="xml">
             <tree create="0" string="Picking list" js_class="lazy_column_list" multi_edit="1" sample="1">
                 <header>
@@ -31,8 +32,8 @@
                        decoration-danger="state != 'assigned' and products_availability_state == 'late'"/>
                 <field name="date_deadline" optional="hide" widget="remaining_days"
                        attrs="{'invisible':[('state', 'in', ('done', 'cancel'))]}"/>
-                <field name="date_done" string="Effective Date" optional="hide"/>
-                <field name="origin" optional="show"/>
+
+
                 <field name="backorder_id" optional="hide"/>
                 <field name="picking_type_id" optional="hide"/>
                 <field name="company_id" groups="base.group_multi_company" optional="show"/>
@@ -46,9 +47,9 @@
     </record>
 
     <record id="view_picking_form_field_service_transfer_order_receive" model="ir.ui.view">
-        <field name="name">stock.picking.form</field>
+        <field name="name">stock.picking.inherit.form</field>
         <field name="model">stock.picking</field>
-        <field eval="20" name="priority"/>
+         <field name="priority" eval="170"/>
         <field name="arch" type="xml">
             <form  string="Transfer">
 
@@ -72,21 +73,6 @@
                     <button name="action_confirm" attrs="{'invisible': [('show_mark_as_todo', '=', False)]}"
                             string="Mark as Todo" type="object" class="oe_highlight" groups="base.group_user"
                             data-hotkey="x"/>
-
-<!--                    <button name="action_confirm" attrs="{'invisible': [('show_mark_as_todo', '=', False)]}"-->
-<!--                            string="Submit For Approval" type="object" class="oe_highlight" groups="base.group_user"-->
-<!--                            data-hotkey="x"/>-->
-                    <!--                    <button name="action_assign" attrs="{'invisible': [('show_check_availability', '=', False)]}"-->
-                    <!--                            string="Check Availability" type="object" class="oe_highlight" groups="base.group_user"/>-->
-<!--                    <button name="button_validate"-->
-<!--                            attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')),('show_validate', '=', False)]}"-->
-<!--                            string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user"-->
-<!--                            data-hotkey="v"/>-->
-
-<!--                    <button name="button_validate"-->
-<!--                            attrs="{'invisible': True}"-->
-<!--                            string="Validate" type="object" groups="stock.group_stock_user" class="o_btn_validate"-->
-<!--                            data-hotkey="v"/>-->
                     <button name="button_validate"
                             attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')),('show_validate', '=', False)]}"
                             string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user"
@@ -211,9 +197,10 @@
                                    decoration-success="state == 'assigned' or products_availability_state == 'available'"
                                    decoration-warning="state != 'assigned' and products_availability_state in ('expected', 'available')"
                                    decoration-danger="state != 'assigned' and products_availability_state == 'late'"/>
-                            <field name="date_done" string="Effective Date"
-                                   attrs="{'invisible': [('state', '!=', 'done')]}"/>
+
                             <field name="service_order_id" domain="[('receive_customer','=',True)]" force_save="1"/>
+                             <field name="branch_id"  string="From Branch" force_save="1" readonly="1"
+                                   attrs="{'invisible': [('picking_type_code', '!=', 'internal')]}"/>
 
                             <field name="transfer_to_branch" force_save="1"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'internal')]}"/>

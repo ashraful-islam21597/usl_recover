@@ -107,10 +107,10 @@ class FieldService(models.Model):
                     if picking:
                         result['domain'] = [('id', '=', picking)]
                     else:
-                        # override the context to get rid of the default filtering on operation type
+
                         result['context'] = {'default_service_order_id': rec.id,
                                              'default_picking_type_id': picking_type.id}
-                        # choose the view_mode accordingly
+
 
                         res = self.env.ref('usl_service_erp.view_picking_form_field_service_transfer', False)
                         form_view = [(res and res.id or False, 'form')]
