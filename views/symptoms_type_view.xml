@@ -7,8 +7,6 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="symptom"/>
-
-
             </tree>
         </field>
     </record>
@@ -22,13 +20,28 @@
                     <group>
                         <group>
                             <field name="symptom"/>
-
-
                         </group>
                         <group>
                             <field name="active" widget="boolean_toggle"/>
                         </group>
+
                     </group>
+                    <group>
+                            <notebook>
+                                <page string="Possible Solution">
+                                    <field name="possible_solution_lines_ids">
+                                        <tree editable="bottom">
+                                            <field name="possible_solution"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="possible_solution"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
                 </sheet>
             </form>
         </field>

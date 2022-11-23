@@ -21,7 +21,6 @@
                     <group>
                         <group>
                             <field name="reason"/>
-
                         </group>
                         <group>
                             <field name="active" widget="boolean_toggle"/>

@@ -12,8 +12,13 @@ class AssignEngineerDetails(models.Model):
                             default=lambda self: _('New'))
     assign_engineer_lines_ids = fields.One2many('assign.engineer.lines', 'engineer_id', string="Assign Engineer")
     order_id = fields.Many2one('field.service', string="Service Order", readonly=True)
+    customer = fields.Many2one(related='order_id.customer_id', string='Customer')
     contact = fields.Char(related="order_id.phone", string='Contact No', readonly=True)
-    #assign_engineer_lines_id = fields.Many2one('assign.engineer.lines', string="Engineer")
+    item = fields.Many2one(related="order_id.product_id", string="Item")
+    priority = fields.Selection(related="order_id.priority", string="Priority")
+    priority_lavel_duration = fields.Char(related="order_id.priority_lavel_duration", string='Priority Level Duration')
+    warranty = fields.Many2one(related='order_id.warranty_status')
+    # assign_engineer_lines_id = fields.Many2one('assign.engineer.lines', string="Engineer")
     is_qa = fields.Char(string="Is QA?")
     qa_result = fields.Char(string="QA Result")
     qa = fields.Char(string="QA")
@@ -44,10 +49,12 @@ class AssignEngineerLines(models.Model):
     _description = "Assign Engineer Lines"
     _rec_name = "engineer_name"
 
+
+
+
     # engineer_name = fields.Many2one('assign.engineer', required=True, string="Engineer ID" )
     # domain = lambda self: [("groups_id", "=", self.env.ref("usl_service_erp.group_service_engineer").id)]
     # engineer_name = fields.Many2one('res.users', string="Engineer", domain=lambda self: self._get_user_domain())
-
     engineer_name = fields.Many2one('res.users', string="Engineer", domain="[('id','in',engineer_name_domain)]")
     # engineer_name1 = fields.Many2one(related='engineer_name.engineer_name', string="Engineer Name")
     # engineer_task = fields.Integer(related='engineer_name.task_count', string="Task")
@@ -140,7 +147,7 @@ class AssignEngineerLines(models.Model):
         if self.assign_for == 'diagnosis and repair':
             self.env['diagnosis.repair'].create(
                 {'order_id': self.engineer_id.order_id.id, 'engineer': self.engineer_name.id,
-                 'contact': self.engineer_id.contact})
+                 'contact': self.engineer_id.contact, 'priority': self.engineer_id.priority, 'priority_lavel_duration':self.engineer_id.priority_lavel_duration, 'warranty':self.engineer_id.warranty})
             # self.env['diagnosis.repair.lines'].create({'symptoms': self.engineer_id.order_id.symptoms_lines_id.symptoms})
 
     def name_get(self):

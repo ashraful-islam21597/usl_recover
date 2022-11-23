@@ -5,26 +5,19 @@
               web_icon="usl_service_order_automation,static/description/icon.png"
               sequence="0"/>
     <menuitem id="menu_field_service_master"
-              name="Field Service Details"
+              name="Field Service"
               parent="menu_field_service_root"
               sequence="0"/>
     <menuitem id="configuration_main_menu"
               name="Configuration"
               parent="menu_field_service_root"
-              sequence="20"/>
-    <menuitem id="inventory_service_main_menu"
-              name="Inventory Service"
+              sequence="25"/>
+    <menuitem id="requisition_main_menu"
+              name="Requisition"
               parent="menu_field_service_root"
               sequence="10"/>
     <menuitem id="menu_task_manager"
               name="Task Manager"
               parent="menu_field_service_root"
-              sequence="25"/>
-<!--    <menuitem id="menu_quality_assurance"-->
-<!--              name="Quality Assurance"-->
-<!--              parent="menu_field_service_root"-->
-<!--              sequence="25"/>-->
-
-
-
+              sequence="20"/>
 </odoo>

@@ -16,12 +16,15 @@ access.engineer.observation,access_engineer_observation,usl_service_erp.model_en
 access.assign.engineer.lines,access_assign_engineer_lines,usl_service_erp.model_assign_engineer_lines,base.group_user,1,1,1,1
 access.diagnosis.repair,access_diagnosis_repair,usl_service_erp.model_diagnosis_repair,base.group_user,1,1,1,1
 access.diagnosis.repair.lines,access_diagnosis_repair_lines,usl_service_erp.model_diagnosis_repair_lines,base.group_user,1,1,1,1
-access.order_transfer,access_order_transfer,usl_service_erp.model_order_transfer,base.group_user,1,1,1,1
-access.order_transfer_lines,access_order_transfer_lines,usl_service_erp.model_order_transfer_lines,base.group_user,1,1,1,1
-access.reasons_type,access_reasons_type,usl_service_erp.model_reasons_type,base.group_user,1,1,1,1
+access.reasons.type,access_reasons_type,usl_service_erp.model_reasons_type,base.group_user,1,1,1,1
+access.warehouse.mapping,access_warehouse_mapping,usl_service_erp.model_warehouse_mapping,base.group_user,1,1,1,1
+access.possible.solution.lines,access_possible_solution_lines,usl_service_erp.model_possible_solution_lines,base.group_user,1,1,1,1
+access.repair.status,access_repair_status,usl_service_erp.model_repair_status,base.group_user,1,1,1,1
+access.service.type.setup,access_service_type_setup,usl_service_erp.model_service_type_setup,base.group_user,1,1,1,1
+access.item.consumption,access_item_consumption,usl_service_erp.model_item_consumption,base.group_user,1,1,1,1
+access.item.consumption.lines,access_item_consumption_lines,usl_service_erp.model_item_consumption_lines,base.group_user,1,1,1,1
 access.quality_list,access_quality_list,usl_service_erp.model_quality_list,base.group_user,1,1,1,1
 access.quality_list_lines,access_quality_list_lines,usl_service_erp.model_quality_list_lines,base.group_user,1,1,1,1
 
 access.quality_assurance_details,access_quality_assurance,usl_service_erp.model_quality_assurance_details,base.group_user,1,1,1,1
 access.quality_assurance_lines,access_quality_assurance_lines,usl_service_erp.model_quality_assurance_lines,base.group_user,1,1,1,1
-

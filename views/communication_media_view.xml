@@ -39,6 +39,6 @@
             id="communication_media_menu"
             name="Communication Media"
             action="action_communication_media"
-            parent="menu_field_service_master"
+            parent="configuration_main_menu"
             sequence="40"/>
 </odoo>

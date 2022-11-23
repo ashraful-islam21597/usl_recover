@@ -1,3 +1,4 @@
+
 .button1{
     max-width:10% !important;
     float: left;
@@ -7,10 +8,7 @@
 .custom_class table{
     width: 300px;
 }
-.custom_class table th {
 
-  background-color: lightgreen;
-}
 
 .custom_class th {
     min-width: 130px !important;
@@ -28,3 +26,4 @@
 .oe_form_sheet_width_wider .clearfix.position-relative.o_form_sheet {
     max-width: 98% !important;
 }
+

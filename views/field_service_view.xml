@@ -2,6 +2,7 @@
 <odoo>
     <record id="view_field_service_tree" model="ir.ui.view">
         <field name="model">field.service</field>
+
         <field name="arch" type="xml">
             <tree>
                 <field name="order_no"/>
@@ -30,81 +31,60 @@
             </tree>
         </field>
     </record>
-
     <record id="view_field_service_form" model="ir.ui.view">
         <field name="name">field.service.form</field>
         <field name="model">field.service</field>
+          <field name="priority" eval="10"/>
         <field name="arch" type="xml">
             <form class="oe_form_sheet_width_wider">
-                <!--                <field name="x1" invisible="0"/>-->
-
+                <!--                 <field name="x1" invisible="0"/> -->
                 <header>
-
-
-                    <button name="reset_to_draft" string="Reset To Draft" class="oe_highlight"
-                            states="approval" type="object"/>
+                    <button name="reset_to_draft" string="Reset To Draft" class="oe_highlight" states="approval"
+                            type="object"/>
                     <button name="action_service_for_approval" string="Submit For Approval" class="oe_highlight"
                             states="draft" type="object"/>
                     <button name="action_approval" string="Approve" class="oe_highlight" states="service_for_approval"
                             type="object"/>
-                    <button name="action_cancel" string="Cancel" states="draft,service_for_approval"
-                            type="object"/>
-
+                    <button name="action_cancel" string="Cancel" states="draft,service_for_approval" type="object"/>
                     <field name="state" widget="statusbar" nolabel="1"
                            statusbar_visible="draft,service_for_approval,approval"/>
                 </header>
-
-
                 <sheet>
-
-
                     <div class="oe_button_box" name="button-box" style="height:50px;">
-
                         <button class="button1 oe_stat_button" name="receive_button" type="object"
-                                string="Order Receive"
-                                icon="fa-check-square">
+                                string="Order Receive" icon="fa-check-square">
+
                         </button>
-                        <button class="button1 oe_stat_button" name="transfer_button"
-                                type="object" string="Order Transfer"
-                                icon="fa-exchange">
+                        <button class="button1 oe_stat_button" name="transfer_button" type="object"
+                                string="Order Transfer" icon="fa-exchange">
+
                         </button>
                         <button class="button1 oe_stat_button" type="object" string="Assign Engineer"
                                 name="action_view_assign" icon="fa-user">
+
                         </button>
                         <button class="button1 oe_stat_button" type="object" string="Diagnosis and Repair"
-                                name="action_diagnosis_repair"
-                                icon="fa-bug">
+                                name="action_diagnosis_repair" icon="fa-bug">
+
                         </button>
                         <button class="button1 oe_stat_button" type="object" string="Item Consumption"
-                                name="actions_test" icon="fa-wrench">
-                        </button>
+                                name="action_item_consumption" icon="fa-wrench"></button>
                         <button class="button1 oe_stat_button" type="object" string="Transport Activity"
-                                name="actions_test" icon="fa-truck">
-                        </button>
-                        <button class="button1 oe_stat_button" type="object" string="Communication"
-                                name="actions_test"
-                                icon="fa-phone">
-                        </button>
-
-
+                                name="actions_test" icon="fa-truck"></button>
+                        <button class="button1 oe_stat_button" type="object" string="Communication" name="actions_test"
+                                icon="fa-phone"></button>
                         <button class="button1 oe_stat_button" type="object" string="Invoice" name="actions_test"
-                                icon="fa-file">
-                        </button>
+                                icon="fa-file"></button>
                         <button class="button1 oe_stat_button" type="object" string="Delivery" name="actions_test"
-                                icon="fa-truck">
-                        </button>
+                                icon="fa-truck"></button>
                         <button class="button1 oe_stat_button" type="object" string="Remarks" name="receive_button"
-                                icon="fa-comments-o">
-                        </button>
+                                icon="fa-comments-o"></button>
                     </div>
                     <div class="col col-md-2">
-
                         <div>
                             <field name="current_branch" class="oe_inline" invisible="1"/>
                         </div>
                     </div>
-
-
                     <div class="row d-flex">
                         <div class="col col-md-2">
                             <label for="order_no"/>
@@ -115,8 +95,7 @@
                         <div class="col col-md-2">
                             <label for="branch_name"/>
                             <div>
-                                <field name="branch_name" class="oe_inline" force_save="1"
-                                       readonly="True"/>
+                                <field name="branch_name" class="oe_inline" force_save="1" readonly="True"/>
                             </div>
                         </div>
                         <div class="col col-md-2">
@@ -156,7 +135,6 @@
                                        attrs="{'readonly': [('id', '!=', False),('state', '=', 'approval')]}"/>
                             </div>
                         </div>
-
                         <div class="col col-md-2">
                             <label for="invoice"/>
                             <div>
@@ -226,8 +204,7 @@
                             <label for="phone"/>
                             <div>
                                 <field name="phone" class="oe_inline"
-                                       attrs="{'readonly': [('state', '=', 'approval')]}"
-                                />
+                                       attrs="{'readonly': [('state', '=', 'approval')]}"/>
                             </div>
                         </div>
                         <div class="col col-md-2">
@@ -264,7 +241,7 @@
                         <div class="col col-md-2">
                             <label for="so_transfer"/>
                             <div>
-                                <field name="so_transfer" class="oe_inline"
+                                <field name="so_transfer" class="oe_inline" force_save="1"
                                        attrs="{'readonly': [('state', '=', 'approval')]}"/>
                             </div>
                         </div>
@@ -272,9 +249,8 @@
                             <label for="receive_customer"/>
                             <div>
                                 <field name="receive_customer" class="oe_inline" force_save="1"
+                                attrs="{'readonly': [('state', '=', 'approval')]}"
                                 />
-
-
                             </div>
                         </div>
                         <div class="col col-md-2">
@@ -301,7 +277,6 @@
                             </div>
                         </div>
                     </div>
-
                     <notebook>
                         <page string="Quality Assurance Details" invisible="1">
                             <field name="qa_details_ids">
@@ -311,7 +286,8 @@
                                     <field name="warranty_status"/>
                                     <field name="symptoms"/>
                                     <field name="problem"/>
-                                    <field name="diagonisis_date"/>
+                                     <field name="order_date"/>
+                                    <field name="diagnosis_date"/>
                                     <field name="service_charge"/>
                                     <field name="total_amount"/>
                                     <field name="customer_confirmaation"/>
@@ -328,7 +304,8 @@
                                             <field name="warranty_status"/>
                                             <field name="symptoms"/>
                                             <field name="problem"/>
-                                            <field name="diagonisis_date"/>
+                                             <field name="order_date"/>
+                                            <field name="diagnosis_date"/>
                                             <field name="service_charge"/>
                                             <field name="total_amount"/>
                                             <field name="customer_confirmaation"/>
@@ -341,8 +318,6 @@
                                 </form>
                             </field>
                         </page>
-
-
                         <page string="Symptoms">
                             <field name="symptoms_lines_ids" attrs="{'readonly': [('state', '=', 'approval')]}">
                                 <tree editable="bottom">
@@ -394,10 +369,17 @@
                                        attrs="{'readonly': [('state', '=', 'approval')]}"/>
                             </div>
                         </div>
+<!--                        <div class="col col-md-2">-->
+<!--                            <label for="repair_status"/>-->
+<!--                            <div>-->
+<!--                                <field name="repair_status" style="width:100%% !important;" class="oe_inline"-->
+<!--                                       force_save="1" attrs="{'readonly': [('state', '=', 'approval')]}"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="col col-md-2">
-                            <label for="repair_status"/>
+                            <label for="repair_status1"/>
                             <div>
-                                <field name="repair_status" style="width:100%% !important;" class="oe_inline"
+                                <field name="repair_status1" style="width:100%% !important;" class="oe_inline"
                                        force_save="1" attrs="{'readonly': [('state', '=', 'approval')]}"/>
                             </div>
                         </div>
@@ -412,8 +394,7 @@
                             <label for="item_receive_branch"/>
                             <div>
                                 <field name="item_receive_branch" style="width:98% !important;" class="oe_inline"
-                                       force_save="1"
-                                       readonly="True"/>
+                                       force_save="1" readonly="True"/>
                             </div>
                         </div>
                         <div class="col col-md-2">
@@ -432,7 +413,6 @@
                         </div>
                     </div>
                 </sheet>
-
                 <div class="oe_chatter">
                     <field name="message_follower_ids" groups="base.group_user"/>
                     <field name="activity_ids"/>
@@ -441,8 +421,6 @@
             </form>
         </field>
     </record>
-
-
     <record id="action_field_service" model="ir.actions.act_window">
         <field name="name">Service Order</field>
         <field name="type">ir.actions.act_window</field>
@@ -453,13 +431,9 @@
             <p class="o_view_nocontent_smiling_face">Create your fast field service !</p>
         </field>
     </record>
-
     <menuitem id="menu_field_service"
               name="Create Service Order"
               parent="menu_field_service_master"
               action="action_field_service"
-              sequence="10"/>
-
+              sequence="-10"/>
 </odoo>
-
-

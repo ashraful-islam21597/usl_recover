@@ -8,11 +8,11 @@ class AssignEngineer(models.Model):
     _rec_name = "engineer_name"
 
     engineer_id = fields.Char(string='Engineer ID', required=True, copy=False, readonly=True,
-                           default=lambda self: _('New'))
+                              default=lambda self: _('New'))
     # engineer_name = fields.Char(string="Engineer")
     engineer_contact = fields.Char(string="Contact")
     engineer_email = fields.Char(string="Email")
-    engineer_branch = fields.Many2one('res.branch',string="Branch")
+    engineer_branch = fields.Many2one('res.branch', string="Branch")
     assign_date = fields.Date(string="Assign Date")
     assign_status = fields.Selection([('assigned', 'Assigned'), ('pending', 'Pending')], string="Assign Status")
     assign_for = fields.Selection(
@@ -30,26 +30,22 @@ class AssignEngineer(models.Model):
     # en = fields.Many2one('res.users', string="En", domain=lambda self: [("groups_id", "=", self.env.ref("usl_service_erp.group_service_engineer").id)])
     engineer_name = fields.Many2one('res.users', string="En", domain=lambda self: self._get_user_domain())
 
-
-
     task_count = fields.Integer(string='Task Count', compute='_compute_task_count')
 
     def _get_user_domain(self):
-        all_users=self.env['res.users'].sudo().search([])
-        get_users=self.env.ref("usl_service_erp.group_service_engineer").users
-        if not isinstance(get_users,bool) and get_users:
-            domain=[('id','in',get_users.ids)]
+        all_users = self.env['res.users'].sudo().search([])
+        get_users = self.env.ref("usl_service_erp.group_service_engineer").users
+        if not isinstance(get_users, bool) and get_users:
+            domain = [('id', 'in', get_users.ids)]
         else:
             domain = [('id', 'in', all_users.ids)]
         # domain = ["groups_id", "=", self.env.ref("usl_service_erp.group_service_engineer").id]
         return domain
 
-
     def _compute_task_count(self):
         for rec in self:
             task_count = self.env['diagnosis.repair'].search_count([('engineer', '=', rec.id)])
             rec.task_count = task_count
-
 
     def action_view_tasks(self):
         return {
@@ -62,7 +58,6 @@ class AssignEngineer(models.Model):
             'domain': [('engineer', '=', self.id)],
         }
 
-
     @api.model
     def create(self, vals):
         if vals.get('engineer_id', _('New')) == _('New'):
@@ -70,35 +65,3 @@ class AssignEngineer(models.Model):
         res = super(AssignEngineer, self).create(vals)
 
         return res
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-

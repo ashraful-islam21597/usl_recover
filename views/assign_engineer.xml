@@ -36,13 +36,7 @@
                             <field name="engineer_branch"/>
                             <field name="engineer_contact"/>
                             <field name="active"/>
-<!--                            <field name="en"/>-->
                         </group>
-<!--                        <field name="is_qa"/>-->
-<!--                        <field name="qa_result"/>-->
-<!--                        <field name="qa"/>-->
-<!--                        <field name="remarks"/>-->
-<!--                        <field name="delivery_date"/>-->
                     </group>
                 </sheet>
             </form>
@@ -62,10 +56,10 @@
         </field>
     </record>
 
-    <menuitem
-            id="assign_engineer_menu"
-            name="Engineer Details"
-            action="action_assign_engineer"
-            parent="configuration_main_menu"
-            sequence="5"/>
+<!--    <menuitem-->
+<!--            id="assign_engineer_menu"-->
+<!--            name="Engineer Details"-->
+<!--            action="action_assign_engineer"-->
+<!--            parent="configuration_main_menu"-->
+<!--            sequence="5"/>-->
 </odoo>

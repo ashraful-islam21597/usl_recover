@@ -25,22 +25,20 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <group col="3">
+                    <group col="2">
                         <group>
                             <field name="serial_no"/>
                             <field name="product_id"/>
                             <field name="invoice"/>
+                            <field name="warranty_expiry_date_l"/>
                         </group>
                         <group>
                             <field name="customer_id"/>
                             <field name="p_date"/>
                             <field name="warranty_status"/>
-
-                        </group>
-                        <group>
-                            <field name="warranty_expiry_date_l"/>
                             <field name="warranty_expiry_date_p"/>
                         </group>
+
                     </group>
                 </sheet>
                 <!--Chatter-->
@@ -81,5 +79,5 @@
             name="Field Service Data"
             action="action_field_service_data"
             parent="menu_field_service_master"
-            sequence="0"/>
+            sequence="10"/>
 </odoo>
