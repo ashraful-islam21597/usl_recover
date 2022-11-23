@@ -139,7 +139,7 @@ class QualityAssuranceDetails(models.Model):
     qa_details = fields.Many2one('field.service', string='QA Details')
     learner_id = fields.Char(string="Learner_id")
     rep_seq = fields.Char(string='Token')
-    diagnosis_repair_id= fields.Many2one('diagnosis.repair', string="Diagnosis & Repair")
+    diagnosis_repair_id= fields.Many2one('diagnosis.repair', string="Diagnosis && Repair")
 
 
 
