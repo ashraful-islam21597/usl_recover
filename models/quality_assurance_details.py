@@ -60,6 +60,7 @@ class QualityAssurance(models.Model):
                 'view_mode': 'tree,form',
                 'res_model': 'field.service',
                 'domain': [
+                            ('repair_status1', '=', 'Ready For QC'),
                            ('id','in',so_list_for_assigned_qa),
                            ('current_branch', '=', self.env['res.users'].browse(self._context.get('uid')).branch_id.id)],
                 'views': [(tree_id.id, 'tree'), (form_id.id, 'form')],
@@ -133,7 +134,8 @@ class QualityAssuranceDetails(models.Model):
                                    domain=lambda self: self._get_repair_status())
 
     remarks = fields.Char(string='remarks')
-    task_status = fields.Char(string="QA status")
+    task_status = fields.Many2one('repair.status', string="Task Status",
+                                   domain=lambda self: self._get_repair_status())
     qa_comments = fields.Char(string="QA Comments")
     qa_result = fields.Float(string="QA Result (%)")
     qa_details = fields.Many2one('field.service', string='QA Details')
@@ -163,28 +165,14 @@ class QualityAssuranceDetails(models.Model):
 
     def write(self, values):
         res = super(QualityAssuranceDetails, self).write(values)
-        # z=self.env['field.service'].search([('id','=',self.qa_details.id)])
-        # #x = self.env['repair.status'].search([('id','=',values['qa_status'])]).id
-        #
-        # z.repair_status1 = self.env['repair.status'].search([('id','=',values['qa_status'])]).id
-        print(self.env['repair.status'].search([('id','=',values['qa_status'])]).repair_status)
-        # print(self.qa_details.id,values['qa_comments'])
-        # self.env['diagnosis.repair'].search([('order_id', '=', self.qa_details.id)])
+        z=self.env['field.service'].search([('id','=',self.qa_details.id)])
+        z.repair_status1 = self.qa_status.id
         for rec in self:
             x = self.env['diagnosis.repair'].search([('order_id', '=', rec.qa_details.id)])
             for i in x.diagnosis_repair_lines_ids:
                 if i.rep_seq ==rec.rep_seq:
                     i.qa_comments = rec.qa_comments
 
-
-
-                #if i.qa_comments == False:
-
-
-            # print(x.diagnosis_repair_lines_ids[-1],x.diagnosis_repair_lines_ids[-1].task_status1)
-            # x = self.env['repair.status'].search([('id', '=', values['qa_status'])]).id
-            # x.repair_status1 = self.env['repair.status'].search([('id', '=', values['qa_status'])]).id
-            # print(self.env['repair.status'].search([('id', '=', values['qa_status'])]).repair_status)
             return res
     @api.onchange('qa_status')
     def so_qa_status(self):
@@ -216,6 +204,7 @@ class diagnosisRepair(models.Model):
             print(i.rep_seq)
 
             val_list = []
+
             if i.task_status1.repair_status == 'Ready For QC':
                 vals = (0, 0, {
                     'order_id': i.diagnosis_repair.order_id.order_no,
@@ -241,8 +230,14 @@ class diagnosisRepair(models.Model):
         res = super(DiagnosisRepairLines, self).write(values)
         s=self.env['diagnosis.repair.lines'].search([('rep_seq', '=', self.rep_seq)])
         s1=self.env['quality.assurance.details'].search([('rep_seq', '=', self.rep_seq)])
-        print(s1)
-        print(values,s.symptoms.symptom)
+        s2 = self.env['diagnosis.repair'].search([('id', '=', self.diagnosis_repair.id)])
+        if s1.qa_status.repair_status == 'QA Return':
+            print("fhgkslfdjg")
+            for i in s2.order_id.qa_details_ids:
+                if i.rep_seq == self.rep_seq:
+                    print(s2.order_id.qa_details_ids)
+                    s2.order_id.qa_details_ids.unlink()
+        print(s1.qa_status)
         return res
 
 

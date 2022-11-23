@@ -212,6 +212,10 @@ class DiagnosisRepairLines(models.Model):
                                        store=False,
                                        )
 
+    # @api.onchange('task_status1')
+    # def onchange_task_status(self):
+
+
 
 
     @api.depends('part')
