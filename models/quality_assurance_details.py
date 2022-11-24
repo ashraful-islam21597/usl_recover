@@ -20,6 +20,11 @@ class QualityAssurance(models.Model):
         print(self.env['res.users'].browse(self._context.get('uid')).branch_id.name)
         user = self.env['res.users'].browse(self._context.get('uid'))
         if user.has_group('usl_service_erp.group_service_manager'):
+            d = self.env['repair.status'].search(
+                [('repair_status', '=', 'Ready For QC')])
+            print('--------------')
+            print('*********************', d)
+
             return {
                 'type': 'ir.actions.act_window',
                 'name': 'Quality Assurance',
@@ -27,7 +32,9 @@ class QualityAssurance(models.Model):
                 'view_mode': 'tree,form',
                 'res_model': 'field.service',
                 'domain': [
-                    #('id', 'in', so_list_for_assigned_qa),
+                    '|',
+                    ('repair_status1', '=', 'Ready For QC'),
+                    ('repair_status1', '=', 'Under QC'),
                     ('current_branch', '=', self.env['res.users'].browse(self._context.get('uid')).branch_id.id)],
                 'views': [(tree_id.id, 'tree'), (form_id.id, 'form')],
                 'target': 'current',
@@ -48,8 +55,11 @@ class QualityAssurance(models.Model):
 
             print(user.has_group('usl_service_erp.group_service_manager'))
 
-            d = self.env['assign.engineer.lines'].search(
-                [('engineer_name', '=', self.env['res.users'].browse(self._context.get('uid')).id)])
+            d = self.env['repair.status'].search(
+                [('repair_status', '=', 'Ready For QC')])
+            print('--------------')
+            print('*********************',d)
+
             # d=self.env['assign.engineer.details'].search([('engineer_name', '=', self.env['res.users'].browse(self._context.get('uid')).id)])
 
 
@@ -59,12 +69,15 @@ class QualityAssurance(models.Model):
                 'view_type': 'form',
                 'view_mode': 'tree,form',
                 'res_model': 'field.service',
+
+
                 'domain': [
                             ('repair_status1', '=', 'Ready For QC'),
                            ('id','in',so_list_for_assigned_qa),
                            ('current_branch', '=', self.env['res.users'].browse(self._context.get('uid')).branch_id.id)],
                 'views': [(tree_id.id, 'tree'), (form_id.id, 'form')],
                 'target': 'current',
+
 
             }
 
@@ -147,12 +160,21 @@ class QualityAssuranceDetails(models.Model):
 
     def _get_repair_status(self):
         get_repair_status = self.env['repair.status'].sudo().search(
-            ['|','|',
+            ['|','|','|',
              ('repair_status', '=', 'Ready For QC'),
              ('repair_status', '=', 'Ready To Deliver'),
+             ('repair_status', '=', 'Under QC'),
              ('repair_status', '=', 'QA Return')])
         domain = [('id', 'in', get_repair_status.ids)]
         return domain
+
+    # def _get_task_status(self):
+    #     get_repair_status = self.env['repair.status'].sudo().search(
+    #         [
+    #          ('repair_status', '=', 'Under QC')])
+    #     print(get_repair_status)
+    #
+    #     return get_repair_status
 
     def write(self, values):
         res=super(QualityAssuranceDetails, self).write(values)
@@ -169,8 +191,10 @@ class QualityAssuranceDetails(models.Model):
         z.repair_status1 = self.qa_status.id
         for rec in self:
             x = self.env['diagnosis.repair'].search([('order_id', '=', rec.qa_details.id)])
+
             for i in x.diagnosis_repair_lines_ids:
                 if i.rep_seq ==rec.rep_seq:
+                    i.qa_status = rec.qa_status.repair_status
                     i.qa_comments = rec.qa_comments
 
             return res
@@ -187,24 +211,12 @@ class diagnosisRepair(models.Model):
     def create(self, vals):
         res = super(DiagnosisRepairLines, self).create(vals)
         if vals.get('serial', _('New')) == _('New'):
-            print("repair")
-            val = self.env['ir.sequence'].next_by_code('diagnosis.repair') or _('New')
+
+            val = self.env['ir.sequence'].next_by_code('diagnosis.repair.lines') or _('New')
             res.rep_seq = val
         s2 = self.env['diagnosis.repair'].search([('id', '=', res.diagnosis_repair.id)])
-        print(s2.diagnosis_repair_lines_ids)
-        # res.diagnosis_repair.order_id.qa_details_ids = [(5, 0, 0)]
-        # val_list = []
-        # for j in s2:
-        #s2.order_id.qa_details_ids = [(5, 0, 0)]
         for i in s2.diagnosis_repair_lines_ids:
-            print(s2.order_id.qa_details_ids)
-            print(i.rep_seq)
             val_list = []
-        for i in s2.diagnosis_repair_lines_ids:
-            print(i.rep_seq)
-
-            val_list = []
-
             if i.task_status1.repair_status == 'Ready For QC':
                 vals = (0, 0, {
                     'order_id': i.diagnosis_repair.order_id.order_no,
@@ -226,19 +238,19 @@ class diagnosisRepair(models.Model):
         s2.order_id.qa_details_ids = val_list
         return res
 
-    def write(self, values):
-        res = super(DiagnosisRepairLines, self).write(values)
-        s=self.env['diagnosis.repair.lines'].search([('rep_seq', '=', self.rep_seq)])
-        s1=self.env['quality.assurance.details'].search([('rep_seq', '=', self.rep_seq)])
-        s2 = self.env['diagnosis.repair'].search([('id', '=', self.diagnosis_repair.id)])
-        if s1.qa_status.repair_status == 'QA Return':
-            print("fhgkslfdjg")
-            for i in s2.order_id.qa_details_ids:
-                if i.rep_seq == self.rep_seq:
-                    print(s2.order_id.qa_details_ids)
-                    s2.order_id.qa_details_ids.unlink()
-        print(s1.qa_status)
-        return res
+    # def write(self, values):
+    #     res = super(DiagnosisRepairLines, self).write(values)
+    #     s=self.env['diagnosis.repair.lines'].search([('rep_seq', '=', self.rep_seq)])
+    #     s1=self.env['quality.assurance.details'].search([('rep_seq', '=', self.rep_seq)])
+    #     s2 = self.env['diagnosis.repair'].search([('id', '=', self.diagnosis_repair.id)])
+    #     if s1.qa_status.repair_status == 'QA Return':
+    #         print("fhgkslfdjg")
+    #         for i in s2.order_id.qa_details_ids:
+    #             if i.rep_seq == self.rep_seq:
+    #                 print(s2.order_id.qa_details_ids)
+    #                 #s2.order_id.qa_details_ids=[(5,0,0)]
+    #     print(s1.qa_status)
+    #     return res
 
 
 class QualityCheckListLines(models.Model):

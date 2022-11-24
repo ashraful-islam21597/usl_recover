@@ -51,10 +51,11 @@
     <record id="view_picking_form_field_service_receive" model="ir.ui.view">
         <field name="name">stock.picking.inherit.receive.form</field>
         <field name="model">stock.picking</field>
-        <field eval="20" name="priority"/>
+        <field eval="21" name="priority"/>
         <field name="arch" type="xml">
             <form string="Transfer">
-
+                <field name="custom_operation_receive" invisible="1"/>
+<!--                <field name="compute_receive_transfer" invisible="1"/>-->
                 <field name="is_locked" invisible="1"/>
                 <field name="show_mark_as_todo" invisible="1"/>
                 <field name="show_check_availability" invisible="1"/>
@@ -175,12 +176,12 @@
                             <!--                                       attrs="{'invisible': [('picking_type_code', 'in', ['incoming', 'outgoing'])]}"/>-->
                             <!--                            </div>-->
                             <field name="partner_id" nolabel="1" invisible="1"/>
-                            <field name="picking_type_id"
+                            <field name="picking_type_id" readonly="1" force_save="1"
                                    attrs="{'invisible': [('hide_picking_type', '=', True)]}"/>
-                            <field name="location_id" options="{'no_create': True}"
+                            <field name="location_id"  readonly="1" options="{'no_create': True}" force_save="1"
                                    groups="stock.group_stock_multi_locations"
                                    attrs="{'invisible': [('picking_type_code', '=', 'incoming')]}"/>
-                            <field name="location_dest_id" options="{'no_create': True}"
+                            <field name="location_dest_id"  readonly="1" force_save="1" options="{'no_create': True}"
                                    groups="stock.group_stock_multi_locations"
                                    attrs="{'invisible': [('picking_type_code', '=', 'outgoing')]}"/>
                             <field name="backorder_id" attrs="{'invisible': [('backorder_id','=',False)]}"/>
@@ -207,7 +208,7 @@
                                    decoration-danger="state != 'assigned' and products_availability_state == 'late'"/>
                             <field name="date_done" string="Effective Date"
                                    attrs="{'invisible': [('state', '!=', 'done')]}"/>
-                            <field name="service_order_id" force_save="1" domain="[('receive_customer','=',False)]"/>
+                            <field name="service_order_id" force_save="1" domain="[('receive_customer','=',False)]" />
                             <!--                            <field name="origin" placeholder="e.g. PO0032"/>-->
                             <field name="owner_id" groups="stock.group_tracking_owner"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'incoming')]}"/>
@@ -244,7 +245,7 @@
                                     <field name="order_ref"/>
                                     <field name="name" invisible="1"/>
                                     <field name="state" invisible="1" readonly="0"/>
-                                    <field name="picking_type_id" invisible="1"/>
+                                    <field name="picking_type_id"  invisible="1"/>
                                     <field name="location_id" invisible="1"/>
                                     <field name="location_dest_id" invisible="1"/>
 
@@ -384,7 +385,7 @@
     </record>
 
     <record id="action_order_receive" model="ir.actions.act_window">
-        <field name="name">Item Receive</field>
+        <field name="name">Servie Order Receive</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.picking</field>
         <field name="view_mode">form</field>

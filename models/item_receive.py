@@ -6,9 +6,10 @@ from odoo.exceptions import UserError
 class StockPickingOperation(models.Model):
     _inherit = "stock.picking"
     _order = 'name desc'
+    
     serial = fields.Char(string='Order No', required=True, copy=False, readonly=True,
                          default=lambda self: _('New'))
-    service_order_id = fields.Many2one('field.service', string="Service Order")
+    service_order_id = fields.Many2one('field.service', string="Service Order",domain=[('receive_customer','!=',True)])
     transfer_to_branch = fields.Many2one('res.branch', string="To Branch")
     contact_person = fields.Many2one('res.partner')
     state = fields.Selection([
@@ -19,12 +20,13 @@ class StockPickingOperation(models.Model):
         ('assigned', 'Ready'),
         ('done', 'Done'),
         ('cancel', 'Cancelled'), ])
+    # compute_receive_transfer=fields.Boolean(compute="_set_operation_type_id_for_transfer_receive")
     custom_operation_receive = fields.Boolean(default=False)
     custom_operation_transfer = fields.Boolean(default=False)
     picking_type_id = fields.Many2one(
         'stock.picking.type', 'Operation Type',
-        required=True, readonly=True,
-        default=lambda self: self._set_operation_type(),
+        readonly=False,
+        default=lambda self: self._set_operation_type_id(),
         states={'draft': [('readonly', False)]})
     received = fields.Boolean(related='service_order_id.receive_customer', string="received status")
     branch_id = fields.Many2one('res.branch', default=lambda self: self.env.user.branch_id)
@@ -42,8 +44,7 @@ class StockPickingOperation(models.Model):
             self.service_order_id.item_receive_status = "Received"
         return res
 
-
-    def _set_operation_type(self):
+    def _set_operation_type_id(self):
         if 'default_custom_operation_transfer' in self.env.context.keys() and self.env.context.get(
                 'default_custom_operation_transfer') == True:
             return self.env['stock.picking.type'].search(
@@ -51,11 +52,18 @@ class StockPickingOperation(models.Model):
                  ('code', '=', 'internal')], limit=1).id
         elif 'default_custom_operation_receive' in self.env.context.keys() and self.env.context.get(
                 'default_custom_operation_receive') == True:
+            print(self.custom_operation_receive)
+            test=self.env['stock.picking.type'].search(
+                [('warehouse_id', '=', self.env.user.context_default_warehouse_id.id),
+                 ('code', '=', 'incoming')], limit=1)
 
             return self.env['stock.picking.type'].search(
                 [('warehouse_id', '=', self.env.user.context_default_warehouse_id.id),
                  ('code', '=', 'incoming')], limit=1).id
+            # return {'domain':{'picking_type_id': [('id', 'in', picking_type_id.ids)]}}
         else:
+            print('noine')
+            # self.picking_type_id=None
             None
 
     @api.onchange('service_order_id')
@@ -114,8 +122,9 @@ class StockPickingOperation(models.Model):
     def create(self, vals):
         res = super(StockPickingOperation, self).create(vals)
         if vals.get('serial', _('New')) == _('New'):
-            print("receive")
+            print("receive",res.picking_type_id.code,res.custom_operation_receive)
             if res.picking_type_id.code == 'incoming' and res.custom_operation_receive == False:
+                print("fhgfsdg")
                 val = self.env['ir.sequence'].next_by_code('so.receive') or _('New')
                 res.name = val
 

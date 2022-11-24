@@ -83,14 +83,16 @@ class AdvanceItemRequisitionInherit(models.Model):
             None
 
     def _set_operation_type_id(self):
+
         if 'default_picking_custom' in self.env.context.keys() and self.env.context.get(
                 'default_picking_custom') == True:
 
             return self.env['stock.picking.type'].search(
                 [('warehouse_id', '=', self.env.user.context_default_warehouse_id.id),
                  ('code', '=', 'internal')]).id
+
         else:
-            None
+            return super(AdvanceItemRequisitionInherit, self)._set_operation_type_id()
 
     @api.depends('state', 'move_lines')
     def _compute_show_submit_for_approval(self):

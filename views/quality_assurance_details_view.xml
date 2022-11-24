@@ -21,7 +21,7 @@
                 <field name="item_receive_branch"/>
                 <field name="warranty_status"/>
                 <field name="so_transfer"/>
-                <field name="repair_status"/>
+                <field name="repair_status1"/>
                 <field name="invoice" optional="hide"/>
                 <field name="p_date" optional="hide"/>
                 <field name="customer_id"/>
@@ -200,6 +200,13 @@
                                        force_save="1" readonly="1"/>
                             </div>
                         </div>
+                         <div class="col col-md-6">
+                            <label for="remark"/>
+                            <div>
+                                <field name="repair_status1"/>
+                            </div>
+                        </div>
+
 
                     </div>
                     <div class="row d-flex">

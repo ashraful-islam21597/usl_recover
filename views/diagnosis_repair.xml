@@ -77,7 +77,7 @@
                                 <field name="diagnosis_repair_lines_ids" style="width:1060px; overflow-x: scroll;" attrs="{'readonly': [('state', '=', 'approved')]}">
                                     <tree editable="bottom"  class="custom_class">
 <!--                                        <field name="item" />-->
-                                        <field name="rep_seq" />
+                                        <field name="rep_seq"  invisible="1"/>
                                         <field name="symptoms"  />
                                         <field name="possible_solution" />
                                         <field name="symptoms_domain" invisible="1"/>
@@ -105,7 +105,7 @@
                                     <form class="custom_class1">
 
                                         <group>
-                                            <field name="rep_seq"  />
+                                            <field name="rep_seq"  invisible="1"/>
                                             <field name="item"/>
 <!--                                            <field name="warranty_status"/>-->
                                             <field name="symptoms"/>

@@ -97,13 +97,14 @@ class ItemRequisitionInherit(models.Model):
                 [('id', '=', self.picking_type_id.id)]).default_location_src_id
 
     def _set_operation_type_id(self):
+
         if 'default_picking_user' in self.env.context.keys() and self.env.context.get(
                 'default_picking_user') == True:
             return self.env['stock.picking.type'].search(
                 [('warehouse_id', '=', self.env.user.context_default_warehouse_id.id),
                  ('code', '=', 'internal')]).id
         else:
-            None
+            return super(ItemRequisitionInherit, self)._set_operation_type_id()
 
     @api.model
     def create(self, vals):

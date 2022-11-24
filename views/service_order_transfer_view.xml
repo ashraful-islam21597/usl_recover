@@ -223,7 +223,7 @@
                             <field name="transfer_to_branch" force_save="1" required="1"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'internal')]}"/>
                             <!--                            <field name="origin" placeholder="e.g. PO0032"/>-->
-                             <field name="service_order_id" required="1" domain="[('receive_customer','=',True)]" force_save="1"/>
+                             <field name="service_order_id" required="1" domain="[('so_transfer','=',False)]" force_save="1"/>
                             <field name="owner_id" groups="stock.group_tracking_owner"
                                    attrs="{'invisible': [('picking_type_code', '!=', 'incoming')]}"/>
                         </group>
