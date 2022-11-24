@@ -191,7 +191,7 @@ class QualityAssuranceDetails(models.Model):
         z.repair_status1 = self.qa_status.id
         for rec in self:
             x = self.env['diagnosis.repair'].search([('order_id', '=', rec.qa_details.id)])
-
+            #print(self.env['assign.engineer.details'].search([('id', '=', rec.qa_details.id)]))
             for i in x.diagnosis_repair_lines_ids:
                 if i.rep_seq ==rec.rep_seq:
                     i.qa_status = rec.qa_status.repair_status

@@ -36,6 +36,7 @@ class DiagnosisRepair(models.Model):
     approval = fields.Boolean(compute='_approval', default=False)
     permission = fields.Boolean(compute='_permission', default=False)
     requisition = fields.Boolean(compute='_requisition', string='requisition', default=False)
+    assigned_engineer_id=fields.Many2one('assign.engineer.lines',string='Assigned Engineer')
 
 
     def _requisition(self):

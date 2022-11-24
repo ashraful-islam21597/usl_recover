@@ -60,6 +60,7 @@
                             <field name="order_id"/>
                             <field name="item"/>
                             <field name="engineer"/>
+                            <field name="assigned_engineer_id" force_save="1" />
                         </group>
                         <group>
                             <field name="customer"/>
@@ -107,7 +108,7 @@
                                         <group>
                                             <field name="rep_seq"  invisible="1"/>
                                             <field name="item"/>
-<!--                                            <field name="warranty_status"/>-->
+
                                             <field name="symptoms"/>
                                             <field name="possible_solution"/>
 

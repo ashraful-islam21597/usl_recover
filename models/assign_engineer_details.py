@@ -144,9 +144,11 @@ class AssignEngineerLines(models.Model):
 
     @api.onchange('assign_for')
     def onchange_assign_for(self):
+        print('******',self.id)
+        print('******', self.engineer_id.order_id.id)
         if self.assign_for == 'diagnosis and repair':
             self.env['diagnosis.repair'].create(
-                {'order_id': self.engineer_id.order_id.id, 'engineer': self.engineer_name.id,
+                {'order_id': self.engineer_id.order_id.id, 'engineer': self.engineer_name.id,'assigned_engineer_id':self.id,
                  'contact': self.engineer_id.contact, 'priority': self.engineer_id.priority, 'priority_lavel_duration':self.engineer_id.priority_lavel_duration, 'warranty':self.engineer_id.warranty})
             # self.env['diagnosis.repair.lines'].create({'symptoms': self.engineer_id.order_id.symptoms_lines_id.symptoms})
 
